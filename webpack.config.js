@@ -37,7 +37,10 @@ var nodeExternals = require('webpack-node-externals'),
         ( entry, sample ) => (
             entry[sample.replace(/^\.\/src\/(.*)\.store\.jsx?/, '$1')] = sample,
                 entry
-        ), {}
+        ),
+        {
+            'index': 'src/index.js'
+        }
     );
 //console.warn(entries)
 module.exports = [
@@ -50,7 +53,7 @@ module.exports = [
         },
         devtool: 'source-map',
         //target   : 'node', // in order to ignore built-in modules like path, fs, etc.
-        //externals: [nodeExternals()],
+        externals: [nodeExternals()],
         resolve: {
             extensions: [
                 "",
