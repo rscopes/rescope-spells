@@ -28,6 +28,7 @@ new Scope(
         appConfig : {
             myMainDataUrl : "http://some.where/{%lang}.json
         }
+        @as.router
         @as.state
         appState : {
             lang               : 'fr',
