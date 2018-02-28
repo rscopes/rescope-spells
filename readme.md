@@ -11,20 +11,29 @@ Work in progress collection of chainable stores decorators for [rescope](https:/
 
 ## Objective ?
 
+Something like :
+
 ```jsx
 new Scope(
     {
+        @as.filteredCollection('appState.currentFilter')
         @as.itemCollection('*[type='article']')
         @as.jsonResource('url', 'params')
         @as.stateMap
         myData : {
-         url    : "appState.myMainDataUrl",
+         url    : "appConfig.myMainDataUrl",
          params : "appState"
         }
         @as.state
+        appConfig : {
+            myMainDataUrl : "http://some.where/{%lang}.json
+        }
+        @as.state
         appState : {
-            myMainDataUrl : "http://some.where/{%lang}.json,
-            lang : 'fr'
+            lang               : 'fr',
+            currentFilter : {
+                name : "Par.*"
+            }
         }
     }
 )
@@ -37,17 +46,24 @@ or
 @scopeToProps('myData')
 @reScope(
     {
+        @as.filteredCollection('appState.currentFilter')
         @as.itemCollection('*[type='article']')
         @as.jsonResource('url', 'params')
         @as.stateMap
         myData : {
-         url    : "appState.myMainDataUrl",
+         url    : "appConfig.myMainDataUrl",
          params : "appState"
         }
         @as.state
+        appConfig : {
+            myMainDataUrl : "http://some.where/{%lang}.json
+        }
+        @as.state
         appState : {
-            myMainDataUrl : "http://some.where/{%lang}.json,
-            lang : 'fr'
+            lang               : 'fr',
+            currentFilter : {
+                name : "Par.*"
+            }
         }
     }
     //,
