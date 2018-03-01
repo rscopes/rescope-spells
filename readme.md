@@ -16,20 +16,23 @@ Something like :
 ```jsx
 new Scope(
     {
-        @as.filteredCollection('appState.currentFilter')
-        @as.itemCollection('*[type='article']')
-        @as.jsonResource('url', 'params')
-        @as.stateMap
+
+        @filteredCollection('appState.currentFilter')
+        @itemCollection('*[type='article']')
+        @jsonResource('url', 'params')
+        @stateMap
         myData : {
+         @scopeRef
          url    : "appConfig.myMainDataUrl",
+         @scopeRef
          params : "appState"
         }
-        @as.state
+        @state
         appConfig : {
             myMainDataUrl : "http://some.where/{%lang}.json
         }
-        @as.router
-        @as.state
+        @router
+        @state
         appState : {
             lang               : 'fr',
             currentFilter : {
@@ -47,19 +50,22 @@ or
 @scopeToProps('myData')
 @reScope(
     {
-        @as.filteredCollection('appState.currentFilter')
-        @as.itemCollection('*[type='article']')
-        @as.jsonResource('url', 'params')
-        @as.stateMap
+        @filteredCollection('appState.currentFilter')
+        @itemCollection('*[type='article']')
+        @jsonResource('url', 'params')
+        @stateMap
         myData : {
+         @scopeRef
          url    : "appConfig.myMainDataUrl",
+         @scopeRef
          params : "appState"
         }
-        @as.state
+        @state
         appConfig : {
             myMainDataUrl : "http://some.where/{%lang}.json
         }
-        @as.state
+        @router
+        @state
         appState : {
             lang               : 'fr',
             currentFilter : {
