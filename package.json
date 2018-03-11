@@ -1,16 +1,20 @@
 {
-  "name": "rescope-wired",
-  "version": "1.0.0",
+  "name": "rescope-spells",
+  "version": "0.0.1",
   "description": "Chainable rescope stores as decorators collection",
   "repository": "https://github.com/CaipiLabs/rescope-wired.git",
   "license": "MIT",
+  "main": "dist/rescopeSpells.js",
   "author": "Nathan Braun <caipilabs@gmail.com>",
   "scripts": {
     "build": "webpack",
-    "test": "mocha --compilers js:babel-core/register ./test/*.test.js -b",
-    "install": "recursive-install --skip-root"
+    "test": "mocha --compilers js:babel-core/register ./test/*.test.js -b"
   },
-  "dependencies": {},
+  "dependencies": {
+    "react-rescope": "^1.1.1",
+    "rescope": "^3.6.1",
+    "prop-types": "^15.6.0"
+  },
   "devDependencies": {
     "babel-cli": "^6.14.0",
     "babel-core": "^6.3.17",

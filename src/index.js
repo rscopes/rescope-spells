@@ -25,14 +25,16 @@
  * @contact : caipilabs@gmail.com
  */
 
-import "rescope";
-import index from "rescope/dist/index";
-import * as RTools from "./ReactHocs";
+import is from "is";
+import {decorator, decorators, Store} from "rescope/dist/index";
+//import "./spellsLib";
 
-index.Component    = RTools.Component;
-index.reScopeProps = RTools.reScopeProps;
-index.reScopeState = RTools.reScopeState;
-index.reScope      = RTools.reScopeState;
-debugger;
-export default index;
 
+let all = {
+    @decorator(is.object)
+    stateMap( obj, cfg ) {
+        return class StateMap extends Store {
+            static use = obj;
+        }
+    }
+}

@@ -32,29 +32,22 @@ var glob    = require("glob")
 
 var production    = process.argv.indexOf("--production") > -1
     || process.argv.indexOf("-p") > -1;
-var nodeExternals = require('webpack-node-externals'),
-    entries       = glob.sync('./src/**/*.store.js').reduce(
-        ( entry, sample ) => (
-            entry[sample.replace(/^\.\/src\/(.*)\.store\.jsx?/, '$1')] = sample,
-                entry
-        ),
-        {
-            'index': 'src/index.js'
-        }
-    );
+var nodeExternals = require('webpack-node-externals');
 //console.warn(entries)
-module.exports = [
+module.exports    = [
     {
-        entry  : entries,
-        output : {
+        entry    : {
+            "rescopeSpells"  : "./src/index.js",
+        },
+        output   : {
             path      : __dirname,
             filename  : production ? "dist/[name].min.js" : "dist/[name].js",
             publicPath: "/",
         },
-        devtool: 'source-map',
+        devtool  : 'source-map',
         //target   : 'node', // in order to ignore built-in modules like path, fs, etc.
         externals: [nodeExternals()],
-        resolve: {
+        resolve  : {
             extensions: [
                 "",
                 ".js",
