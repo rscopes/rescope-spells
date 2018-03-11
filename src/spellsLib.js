@@ -26,11 +26,11 @@
  */
 
 import is from "is";
-import {decorator, decorators, Store, Scope} from "rescope";
+import {isSpell, spells, Store, Scope} from "rescope";
 
 
 let all = {
-    @decorator("stateMap", v => (is.object(v) || is.string(v)))
+    @isSpell("stateMap", v => (is.object(v) || is.string(v)))
     stateMap( obj, { 0: cfg }, ref ) {
         let use = [], state = {};
         Scope.stateMapToRefList(obj, state, use)
@@ -40,7 +40,7 @@ let all = {
             static displayName = ref[1]
         }
     },
-    @decorator("scope", v => (is.object(v)))
+    @isSpell("scope", v => (is.object(v)))
     scope( obj, { 0: cfg }, ref ) {
         
         return Scope.bind(null, obj)

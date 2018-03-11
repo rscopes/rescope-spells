@@ -25,5 +25,6 @@
  * @contact : caipilabs@gmail.com
  */
 
+import "./spellFactory";
 import "./spellsLib";
 
