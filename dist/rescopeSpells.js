@@ -156,7 +156,7 @@
 	            }
 	
 	            return StateMap;
-	        }(_index.Store), _class.use = cfg, _temp;
+	        }(_index.Store), _class.use = obj, _temp;
 	    }
 	}, (_applyDecoratedDescriptor(_obj, "stateMap", [_dec], Object.getOwnPropertyDescriptor(_obj, "stateMap"), _obj)), _obj));
 
