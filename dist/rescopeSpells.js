@@ -77,32 +77,32 @@
 
 	"use strict";
 	
-	var _dec, _desc, _value, _obj; /*
-	                                * Copyright (c)  2018 Wise Wild Web .
-	                                *
-	                                *  MIT License
-	                                *
-	                                *  Permission is hereby granted, free of charge, to any person obtaining a copy
-	                                *  of this software and associated documentation files (the "Software"), to deal
-	                                *  in the Software without restriction, including without limitation the rights
-	                                *  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-	                                *  copies of the Software, and to permit persons to whom the Software is
-	                                *  furnished to do so, subject to the following conditions:
-	                                *
-	                                *  The above copyright notice and this permission notice shall be included in all
-	                                *  copies or substantial portions of the Software.
-	                                *
-	                                *  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-	                                *  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-	                                *  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-	                                *  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-	                                *  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-	                                *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-	                                *  SOFTWARE.
-	                                *
-	                                * @author : Nathanael Braun
-	                                * @contact : caipilabs@gmail.com
-	                                */
+	var _dec, _dec2, _desc, _value, _obj; /*
+	                                       * Copyright (c)  2018 Wise Wild Web .
+	                                       *
+	                                       *  MIT License
+	                                       *
+	                                       *  Permission is hereby granted, free of charge, to any person obtaining a copy
+	                                       *  of this software and associated documentation files (the "Software"), to deal
+	                                       *  in the Software without restriction, including without limitation the rights
+	                                       *  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+	                                       *  copies of the Software, and to permit persons to whom the Software is
+	                                       *  furnished to do so, subject to the following conditions:
+	                                       *
+	                                       *  The above copyright notice and this permission notice shall be included in all
+	                                       *  copies or substantial portions of the Software.
+	                                       *
+	                                       *  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+	                                       *  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+	                                       *  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+	                                       *  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+	                                       *  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+	                                       *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+	                                       *  SOFTWARE.
+	                                       *
+	                                       * @author : Nathanael Braun
+	                                       * @contact : caipilabs@gmail.com
+	                                       */
 	
 	var _is = __webpack_require__(2);
 	
@@ -149,13 +149,14 @@
 	
 	var all = (_dec = (0, _rescope.decorator)("stateMap", function (v) {
 	    return _is2.default.object(v) || _is2.default.string(v);
+	}), _dec2 = (0, _rescope.decorator)("scope", function (v) {
+	    return _is2.default.object(v);
 	}), (_obj = {
 	    stateMap: function stateMap(obj, _ref, ref) {
 	        var _class, _temp;
 	
 	        var cfg = _ref[0];
 	
-	        debugger;
 	        var use = [],
 	            state = {};
 	        _rescope.Scope.stateMapToRefList(obj, state, use);
@@ -170,8 +171,14 @@
 	
 	            return StateMap;
 	        }(_rescope.Store), _class.use = use, _class.state = state, _class.displayName = ref[1], _temp;
+	    },
+	    scope: function scope(obj, _ref2, ref) {
+	        var cfg = _ref2[0];
+	
+	
+	        return _rescope.Scope.bind(null, obj);
 	    }
-	}, (_applyDecoratedDescriptor(_obj, "stateMap", [_dec], Object.getOwnPropertyDescriptor(_obj, "stateMap"), _obj)), _obj));
+	}, (_applyDecoratedDescriptor(_obj, "stateMap", [_dec], Object.getOwnPropertyDescriptor(_obj, "stateMap"), _obj), _applyDecoratedDescriptor(_obj, "scope", [_dec2], Object.getOwnPropertyDescriptor(_obj, "scope"), _obj)), _obj));
 
 /***/ }),
 /* 2 */

@@ -39,5 +39,10 @@ let all = {
             static state       = state;
             static displayName = ref[1]
         }
+    },
+    @decorator("scope", v => (is.object(v)))
+    scope( obj, { 0: cfg }, ref ) {
+        
+        return Scope.bind(null, obj)
     }
 }
