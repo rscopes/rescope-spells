@@ -25,5 +25,20 @@
  * @contact : caipilabs@gmail.com
  */
 
-import "./spellsLib";
+import is from "is";
+import {decorator, decorators, Store, Scope} from "rescope";
 
+
+let all = {
+    @decorator("stateMap", v => (is.object(v) || is.string(v)))
+    stateMap( obj, { 0: cfg }, ref ) {
+        debugger
+        let use = [], state = {};
+        Scope.stateMapToRefList(obj, state, use)
+        return class StateMap extends Store {
+            static use         = use;
+            static state       = state;
+            static displayName = ref[1]
+        }
+    }
+}
