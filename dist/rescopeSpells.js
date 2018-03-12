@@ -1,0 +1,1144 @@
+/*!
+ * MIT License
+ * 
+ * Copyright (c) 2018 Wise Wild Web
+ * 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId])
+/******/ 			return installedModules[moduleId].exports;
+/******/
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			exports: {},
+/******/ 			id: moduleId,
+/******/ 			loaded: false
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.loaded = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "/";
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(0);
+/******/ })
+/************************************************************************/
+/******/ ([
+/* 0 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	__webpack_require__(1);
+	
+	__webpack_require__(4);
+
+/***/ }),
+/* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _rescope = __webpack_require__(2);
+	
+	var _rescope2 = _interopRequireDefault(_rescope);
+	
+	var _is = __webpack_require__(3);
+	
+	var _is2 = _interopRequireDefault(_is);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	// will use as external the index in dist
+	
+	/*
+	 * Copyright (c)  2018 Wise Wild Web .
+	 *
+	 *  MIT License
+	 *
+	 *  Permission is hereby granted, free of charge, to any person obtaining a copy
+	 *  of this software and associated documentation files (the "Software"), to deal
+	 *  in the Software without restriction, including without limitation the rights
+	 *  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+	 *  copies of the Software, and to permit persons to whom the Software is
+	 *  furnished to do so, subject to the following conditions:
+	 *
+	 *  The above copyright notice and this permission notice shall be included in all
+	 *  copies or substantial portions of the Software.
+	 *
+	 *  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+	 *  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+	 *  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+	 *  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+	 *  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+	 *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+	 *  SOFTWARE.
+	 *
+	 * @author : Nathanael Braun
+	 * @contact : caipilabs@gmail.com
+	 */
+	var SimpleObjectProto = {}.constructor;
+	_rescope2.default.spells = {};
+	
+	var castTypesToAppliable = {};
+	var castTypes = {};
+	
+	_rescope2.default.isSpell = function caster() {
+	    for (var _len = arguments.length, argz = Array(_len), _key = 0; _key < _len; _key++) {
+	        argz[_key] = arguments[_key];
+	    }
+	
+	    // are we decorating a member / without argz
+	    if (argz[0] instanceof SimpleObjectProto && argz[2] instanceof SimpleObjectProto && argz[0].hasOwnProperty(argz[1])) {
+	        argz[2].value = addCaster(argz[0][argz[1]], argz);
+	        return argz[0];
+	    } else if (!_is2.default.fn(argz[0])) {
+	        return function () {
+	            for (var _len2 = arguments.length, argz2 = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+	                argz2[_key2] = arguments[_key2];
+	            }
+	
+	            // are we decorating a member / with argz
+	            if (argz2[0] instanceof SimpleObjectProto && argz2[2] instanceof SimpleObjectProto && argz2[0].hasOwnProperty(argz2[1])) {
+	                argz2[2].value = addCaster.apply(undefined, [argz2[0][argz2[1]]].concat(argz, [argz2]));
+	                return argz2[0];
+	            } else return caster.apply(undefined, [argz2[0]].concat(argz));
+	        };
+	    }
+	    return addCaster.apply(undefined, argz);
+	};
+	
+	function addCaster() {
+	    for (var _len3 = arguments.length, argz = Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
+	        argz[_key3] = arguments[_key3];
+	    }
+	
+	    var cast = (!argz[0] || _is2.default.fn(argz[0])) && argz.shift();
+	    if (!cast) throw "ReScope cast : bad decorator function";
+	    var typeName = (!argz[0] || _is2.default.string(argz[0])) && argz.shift() || cast.name || cast.displayName,
+	        test = (!argz[0] || _is2.default.fn(argz[0])) && argz.shift(),
+	        prefix = (!argz[0] || _is2.default.string(argz[0])) && argz.shift() || "as",
+	        memberDescr = (!argz[0] || _is2.default.bool(argz[0]) || _is2.default.array(argz[0])) && argz.shift() || true,
+	        casterName = typeName && prefix + typeName[0].toUpperCase() + typeName.substr(1);
+	
+	    if (!castTypesToAppliable[typeName]) {
+	        castTypesToAppliable[typeName] = [];
+	
+	        _rescope2.default.spells[casterName] = castTypes[typeName] = function doCast() {
+	            for (var _len4 = arguments.length, argz = Array(_len4), _key4 = 0; _key4 < _len4; _key4++) {
+	                argz[_key4] = arguments[_key4];
+	            }
+	
+	            // are we decorating a member / without argz
+	            if (argz[0] instanceof SimpleObjectProto && argz[2] instanceof SimpleObjectProto && argz[0].hasOwnProperty(argz[1])) {
+	                argz[0][argz[1]] = applyCastableType(typeName, argz[0][argz[1]], [], argz);
+	                return argz[0];
+	            } else if (!isCastableType(typeName, argz[0])) {
+	                return function () {
+	                    for (var _len5 = arguments.length, argz2 = Array(_len5), _key5 = 0; _key5 < _len5; _key5++) {
+	                        argz2[_key5] = arguments[_key5];
+	                    }
+	
+	                    // are we decorating a member / with argz
+	                    if (argz2[0] instanceof SimpleObjectProto && argz2[2] instanceof SimpleObjectProto && argz2[0].hasOwnProperty(argz2[1])) {
+	                        argz2[0][argz2[1]] = applyCastableType(typeName, argz2[0][argz2[1]], argz, argz2);
+	                        return argz2[0];
+	                    } else return doCast.apply(undefined, [argz2[0]].concat(argz));
+	                };
+	            }
+	            return applyCastableType(typeName, argz[0], argz.slice(1));
+	        };
+	    }
+	    castTypesToAppliable[typeName].unshift({
+	        typeName: typeName, test: test, memberDescr: memberDescr, cast: cast
+	    });
+	    return cast;
+	}
+	
+	function isCastableType(typeName, Comp, member, stateScope) {
+	    var castable = castTypesToAppliable[typeName];
+	    for (var i = 0; i < castable.length; i++) {
+	        if ((member === undefined || !!member == !!castable[i].memberDescr) && castable[i].test(Comp)) return castable[i];
+	    }return false;
+	}
+	
+	function applyCastableType(typeName, Comp, argz, member, stateScope) {
+	
+	    var castable = castTypesToAppliable[typeName] || [];
+	    for (var i = 0; i < castable.length; i++) {
+	        if ((member === undefined || !!member == !!castable[i].memberDescr) && castable[i].test(Comp)) return castable[i].cast(Comp, argz, member);
+	    }console.warn("reScope cast : Unknown type", typeName, Comp);
+	    return false;
+	}
+	
+	exports.default = _rescope2.default;
+	module.exports = exports["default"];
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports) {
+
+	module.exports = require("rescope");
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports) {
+
+	/* globals window, HTMLElement */
+	
+	'use strict';
+	
+	/**!
+	 * is
+	 * the definitive JavaScript type testing library
+	 *
+	 * @copyright 2013-2014 Enrico Marino / Jordan Harband
+	 * @license MIT
+	 */
+	
+	var objProto = Object.prototype;
+	var owns = objProto.hasOwnProperty;
+	var toStr = objProto.toString;
+	var symbolValueOf;
+	if (typeof Symbol === 'function') {
+	  symbolValueOf = Symbol.prototype.valueOf;
+	}
+	var isActualNaN = function (value) {
+	  return value !== value;
+	};
+	var NON_HOST_TYPES = {
+	  'boolean': 1,
+	  number: 1,
+	  string: 1,
+	  undefined: 1
+	};
+	
+	var base64Regex = /^([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{4}|[A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)$/;
+	var hexRegex = /^[A-Fa-f0-9]+$/;
+	
+	/**
+	 * Expose `is`
+	 */
+	
+	var is = {};
+	
+	/**
+	 * Test general.
+	 */
+	
+	/**
+	 * is.type
+	 * Test if `value` is a type of `type`.
+	 *
+	 * @param {Mixed} value value to test
+	 * @param {String} type type
+	 * @return {Boolean} true if `value` is a type of `type`, false otherwise
+	 * @api public
+	 */
+	
+	is.a = is.type = function (value, type) {
+	  return typeof value === type;
+	};
+	
+	/**
+	 * is.defined
+	 * Test if `value` is defined.
+	 *
+	 * @param {Mixed} value value to test
+	 * @return {Boolean} true if 'value' is defined, false otherwise
+	 * @api public
+	 */
+	
+	is.defined = function (value) {
+	  return typeof value !== 'undefined';
+	};
+	
+	/**
+	 * is.empty
+	 * Test if `value` is empty.
+	 *
+	 * @param {Mixed} value value to test
+	 * @return {Boolean} true if `value` is empty, false otherwise
+	 * @api public
+	 */
+	
+	is.empty = function (value) {
+	  var type = toStr.call(value);
+	  var key;
+	
+	  if (type === '[object Array]' || type === '[object Arguments]' || type === '[object String]') {
+	    return value.length === 0;
+	  }
+	
+	  if (type === '[object Object]') {
+	    for (key in value) {
+	      if (owns.call(value, key)) {
+	        return false;
+	      }
+	    }
+	    return true;
+	  }
+	
+	  return !value;
+	};
+	
+	/**
+	 * is.equal
+	 * Test if `value` is equal to `other`.
+	 *
+	 * @param {Mixed} value value to test
+	 * @param {Mixed} other value to compare with
+	 * @return {Boolean} true if `value` is equal to `other`, false otherwise
+	 */
+	
+	is.equal = function equal(value, other) {
+	  if (value === other) {
+	    return true;
+	  }
+	
+	  var type = toStr.call(value);
+	  var key;
+	
+	  if (type !== toStr.call(other)) {
+	    return false;
+	  }
+	
+	  if (type === '[object Object]') {
+	    for (key in value) {
+	      if (!is.equal(value[key], other[key]) || !(key in other)) {
+	        return false;
+	      }
+	    }
+	    for (key in other) {
+	      if (!is.equal(value[key], other[key]) || !(key in value)) {
+	        return false;
+	      }
+	    }
+	    return true;
+	  }
+	
+	  if (type === '[object Array]') {
+	    key = value.length;
+	    if (key !== other.length) {
+	      return false;
+	    }
+	    while (key--) {
+	      if (!is.equal(value[key], other[key])) {
+	        return false;
+	      }
+	    }
+	    return true;
+	  }
+	
+	  if (type === '[object Function]') {
+	    return value.prototype === other.prototype;
+	  }
+	
+	  if (type === '[object Date]') {
+	    return value.getTime() === other.getTime();
+	  }
+	
+	  return false;
+	};
+	
+	/**
+	 * is.hosted
+	 * Test if `value` is hosted by `host`.
+	 *
+	 * @param {Mixed} value to test
+	 * @param {Mixed} host host to test with
+	 * @return {Boolean} true if `value` is hosted by `host`, false otherwise
+	 * @api public
+	 */
+	
+	is.hosted = function (value, host) {
+	  var type = typeof host[value];
+	  return type === 'object' ? !!host[value] : !NON_HOST_TYPES[type];
+	};
+	
+	/**
+	 * is.instance
+	 * Test if `value` is an instance of `constructor`.
+	 *
+	 * @param {Mixed} value value to test
+	 * @return {Boolean} true if `value` is an instance of `constructor`
+	 * @api public
+	 */
+	
+	is.instance = is['instanceof'] = function (value, constructor) {
+	  return value instanceof constructor;
+	};
+	
+	/**
+	 * is.nil / is.null
+	 * Test if `value` is null.
+	 *
+	 * @param {Mixed} value value to test
+	 * @return {Boolean} true if `value` is null, false otherwise
+	 * @api public
+	 */
+	
+	is.nil = is['null'] = function (value) {
+	  return value === null;
+	};
+	
+	/**
+	 * is.undef / is.undefined
+	 * Test if `value` is undefined.
+	 *
+	 * @param {Mixed} value value to test
+	 * @return {Boolean} true if `value` is undefined, false otherwise
+	 * @api public
+	 */
+	
+	is.undef = is.undefined = function (value) {
+	  return typeof value === 'undefined';
+	};
+	
+	/**
+	 * Test arguments.
+	 */
+	
+	/**
+	 * is.args
+	 * Test if `value` is an arguments object.
+	 *
+	 * @param {Mixed} value value to test
+	 * @return {Boolean} true if `value` is an arguments object, false otherwise
+	 * @api public
+	 */
+	
+	is.args = is.arguments = function (value) {
+	  var isStandardArguments = toStr.call(value) === '[object Arguments]';
+	  var isOldArguments = !is.array(value) && is.arraylike(value) && is.object(value) && is.fn(value.callee);
+	  return isStandardArguments || isOldArguments;
+	};
+	
+	/**
+	 * Test array.
+	 */
+	
+	/**
+	 * is.array
+	 * Test if 'value' is an array.
+	 *
+	 * @param {Mixed} value value to test
+	 * @return {Boolean} true if `value` is an array, false otherwise
+	 * @api public
+	 */
+	
+	is.array = Array.isArray || function (value) {
+	  return toStr.call(value) === '[object Array]';
+	};
+	
+	/**
+	 * is.arguments.empty
+	 * Test if `value` is an empty arguments object.
+	 *
+	 * @param {Mixed} value value to test
+	 * @return {Boolean} true if `value` is an empty arguments object, false otherwise
+	 * @api public
+	 */
+	is.args.empty = function (value) {
+	  return is.args(value) && value.length === 0;
+	};
+	
+	/**
+	 * is.array.empty
+	 * Test if `value` is an empty array.
+	 *
+	 * @param {Mixed} value value to test
+	 * @return {Boolean} true if `value` is an empty array, false otherwise
+	 * @api public
+	 */
+	is.array.empty = function (value) {
+	  return is.array(value) && value.length === 0;
+	};
+	
+	/**
+	 * is.arraylike
+	 * Test if `value` is an arraylike object.
+	 *
+	 * @param {Mixed} value value to test
+	 * @return {Boolean} true if `value` is an arguments object, false otherwise
+	 * @api public
+	 */
+	
+	is.arraylike = function (value) {
+	  return !!value && !is.bool(value)
+	    && owns.call(value, 'length')
+	    && isFinite(value.length)
+	    && is.number(value.length)
+	    && value.length >= 0;
+	};
+	
+	/**
+	 * Test boolean.
+	 */
+	
+	/**
+	 * is.bool
+	 * Test if `value` is a boolean.
+	 *
+	 * @param {Mixed} value value to test
+	 * @return {Boolean} true if `value` is a boolean, false otherwise
+	 * @api public
+	 */
+	
+	is.bool = is['boolean'] = function (value) {
+	  return toStr.call(value) === '[object Boolean]';
+	};
+	
+	/**
+	 * is.false
+	 * Test if `value` is false.
+	 *
+	 * @param {Mixed} value value to test
+	 * @return {Boolean} true if `value` is false, false otherwise
+	 * @api public
+	 */
+	
+	is['false'] = function (value) {
+	  return is.bool(value) && Boolean(Number(value)) === false;
+	};
+	
+	/**
+	 * is.true
+	 * Test if `value` is true.
+	 *
+	 * @param {Mixed} value value to test
+	 * @return {Boolean} true if `value` is true, false otherwise
+	 * @api public
+	 */
+	
+	is['true'] = function (value) {
+	  return is.bool(value) && Boolean(Number(value)) === true;
+	};
+	
+	/**
+	 * Test date.
+	 */
+	
+	/**
+	 * is.date
+	 * Test if `value` is a date.
+	 *
+	 * @param {Mixed} value value to test
+	 * @return {Boolean} true if `value` is a date, false otherwise
+	 * @api public
+	 */
+	
+	is.date = function (value) {
+	  return toStr.call(value) === '[object Date]';
+	};
+	
+	/**
+	 * is.date.valid
+	 * Test if `value` is a valid date.
+	 *
+	 * @param {Mixed} value value to test
+	 * @returns {Boolean} true if `value` is a valid date, false otherwise
+	 */
+	is.date.valid = function (value) {
+	  return is.date(value) && !isNaN(Number(value));
+	};
+	
+	/**
+	 * Test element.
+	 */
+	
+	/**
+	 * is.element
+	 * Test if `value` is an html element.
+	 *
+	 * @param {Mixed} value value to test
+	 * @return {Boolean} true if `value` is an HTML Element, false otherwise
+	 * @api public
+	 */
+	
+	is.element = function (value) {
+	  return value !== undefined
+	    && typeof HTMLElement !== 'undefined'
+	    && value instanceof HTMLElement
+	    && value.nodeType === 1;
+	};
+	
+	/**
+	 * Test error.
+	 */
+	
+	/**
+	 * is.error
+	 * Test if `value` is an error object.
+	 *
+	 * @param {Mixed} value value to test
+	 * @return {Boolean} true if `value` is an error object, false otherwise
+	 * @api public
+	 */
+	
+	is.error = function (value) {
+	  return toStr.call(value) === '[object Error]';
+	};
+	
+	/**
+	 * Test function.
+	 */
+	
+	/**
+	 * is.fn / is.function (deprecated)
+	 * Test if `value` is a function.
+	 *
+	 * @param {Mixed} value value to test
+	 * @return {Boolean} true if `value` is a function, false otherwise
+	 * @api public
+	 */
+	
+	is.fn = is['function'] = function (value) {
+	  var isAlert = typeof window !== 'undefined' && value === window.alert;
+	  if (isAlert) {
+	    return true;
+	  }
+	  var str = toStr.call(value);
+	  return str === '[object Function]' || str === '[object GeneratorFunction]' || str === '[object AsyncFunction]';
+	};
+	
+	/**
+	 * Test number.
+	 */
+	
+	/**
+	 * is.number
+	 * Test if `value` is a number.
+	 *
+	 * @param {Mixed} value value to test
+	 * @return {Boolean} true if `value` is a number, false otherwise
+	 * @api public
+	 */
+	
+	is.number = function (value) {
+	  return toStr.call(value) === '[object Number]';
+	};
+	
+	/**
+	 * is.infinite
+	 * Test if `value` is positive or negative infinity.
+	 *
+	 * @param {Mixed} value value to test
+	 * @return {Boolean} true if `value` is positive or negative Infinity, false otherwise
+	 * @api public
+	 */
+	is.infinite = function (value) {
+	  return value === Infinity || value === -Infinity;
+	};
+	
+	/**
+	 * is.decimal
+	 * Test if `value` is a decimal number.
+	 *
+	 * @param {Mixed} value value to test
+	 * @return {Boolean} true if `value` is a decimal number, false otherwise
+	 * @api public
+	 */
+	
+	is.decimal = function (value) {
+	  return is.number(value) && !isActualNaN(value) && !is.infinite(value) && value % 1 !== 0;
+	};
+	
+	/**
+	 * is.divisibleBy
+	 * Test if `value` is divisible by `n`.
+	 *
+	 * @param {Number} value value to test
+	 * @param {Number} n dividend
+	 * @return {Boolean} true if `value` is divisible by `n`, false otherwise
+	 * @api public
+	 */
+	
+	is.divisibleBy = function (value, n) {
+	  var isDividendInfinite = is.infinite(value);
+	  var isDivisorInfinite = is.infinite(n);
+	  var isNonZeroNumber = is.number(value) && !isActualNaN(value) && is.number(n) && !isActualNaN(n) && n !== 0;
+	  return isDividendInfinite || isDivisorInfinite || (isNonZeroNumber && value % n === 0);
+	};
+	
+	/**
+	 * is.integer
+	 * Test if `value` is an integer.
+	 *
+	 * @param value to test
+	 * @return {Boolean} true if `value` is an integer, false otherwise
+	 * @api public
+	 */
+	
+	is.integer = is['int'] = function (value) {
+	  return is.number(value) && !isActualNaN(value) && value % 1 === 0;
+	};
+	
+	/**
+	 * is.maximum
+	 * Test if `value` is greater than 'others' values.
+	 *
+	 * @param {Number} value value to test
+	 * @param {Array} others values to compare with
+	 * @return {Boolean} true if `value` is greater than `others` values
+	 * @api public
+	 */
+	
+	is.maximum = function (value, others) {
+	  if (isActualNaN(value)) {
+	    throw new TypeError('NaN is not a valid value');
+	  } else if (!is.arraylike(others)) {
+	    throw new TypeError('second argument must be array-like');
+	  }
+	  var len = others.length;
+	
+	  while (--len >= 0) {
+	    if (value < others[len]) {
+	      return false;
+	    }
+	  }
+	
+	  return true;
+	};
+	
+	/**
+	 * is.minimum
+	 * Test if `value` is less than `others` values.
+	 *
+	 * @param {Number} value value to test
+	 * @param {Array} others values to compare with
+	 * @return {Boolean} true if `value` is less than `others` values
+	 * @api public
+	 */
+	
+	is.minimum = function (value, others) {
+	  if (isActualNaN(value)) {
+	    throw new TypeError('NaN is not a valid value');
+	  } else if (!is.arraylike(others)) {
+	    throw new TypeError('second argument must be array-like');
+	  }
+	  var len = others.length;
+	
+	  while (--len >= 0) {
+	    if (value > others[len]) {
+	      return false;
+	    }
+	  }
+	
+	  return true;
+	};
+	
+	/**
+	 * is.nan
+	 * Test if `value` is not a number.
+	 *
+	 * @param {Mixed} value value to test
+	 * @return {Boolean} true if `value` is not a number, false otherwise
+	 * @api public
+	 */
+	
+	is.nan = function (value) {
+	  return !is.number(value) || value !== value;
+	};
+	
+	/**
+	 * is.even
+	 * Test if `value` is an even number.
+	 *
+	 * @param {Number} value value to test
+	 * @return {Boolean} true if `value` is an even number, false otherwise
+	 * @api public
+	 */
+	
+	is.even = function (value) {
+	  return is.infinite(value) || (is.number(value) && value === value && value % 2 === 0);
+	};
+	
+	/**
+	 * is.odd
+	 * Test if `value` is an odd number.
+	 *
+	 * @param {Number} value value to test
+	 * @return {Boolean} true if `value` is an odd number, false otherwise
+	 * @api public
+	 */
+	
+	is.odd = function (value) {
+	  return is.infinite(value) || (is.number(value) && value === value && value % 2 !== 0);
+	};
+	
+	/**
+	 * is.ge
+	 * Test if `value` is greater than or equal to `other`.
+	 *
+	 * @param {Number} value value to test
+	 * @param {Number} other value to compare with
+	 * @return {Boolean}
+	 * @api public
+	 */
+	
+	is.ge = function (value, other) {
+	  if (isActualNaN(value) || isActualNaN(other)) {
+	    throw new TypeError('NaN is not a valid value');
+	  }
+	  return !is.infinite(value) && !is.infinite(other) && value >= other;
+	};
+	
+	/**
+	 * is.gt
+	 * Test if `value` is greater than `other`.
+	 *
+	 * @param {Number} value value to test
+	 * @param {Number} other value to compare with
+	 * @return {Boolean}
+	 * @api public
+	 */
+	
+	is.gt = function (value, other) {
+	  if (isActualNaN(value) || isActualNaN(other)) {
+	    throw new TypeError('NaN is not a valid value');
+	  }
+	  return !is.infinite(value) && !is.infinite(other) && value > other;
+	};
+	
+	/**
+	 * is.le
+	 * Test if `value` is less than or equal to `other`.
+	 *
+	 * @param {Number} value value to test
+	 * @param {Number} other value to compare with
+	 * @return {Boolean} if 'value' is less than or equal to 'other'
+	 * @api public
+	 */
+	
+	is.le = function (value, other) {
+	  if (isActualNaN(value) || isActualNaN(other)) {
+	    throw new TypeError('NaN is not a valid value');
+	  }
+	  return !is.infinite(value) && !is.infinite(other) && value <= other;
+	};
+	
+	/**
+	 * is.lt
+	 * Test if `value` is less than `other`.
+	 *
+	 * @param {Number} value value to test
+	 * @param {Number} other value to compare with
+	 * @return {Boolean} if `value` is less than `other`
+	 * @api public
+	 */
+	
+	is.lt = function (value, other) {
+	  if (isActualNaN(value) || isActualNaN(other)) {
+	    throw new TypeError('NaN is not a valid value');
+	  }
+	  return !is.infinite(value) && !is.infinite(other) && value < other;
+	};
+	
+	/**
+	 * is.within
+	 * Test if `value` is within `start` and `finish`.
+	 *
+	 * @param {Number} value value to test
+	 * @param {Number} start lower bound
+	 * @param {Number} finish upper bound
+	 * @return {Boolean} true if 'value' is is within 'start' and 'finish'
+	 * @api public
+	 */
+	is.within = function (value, start, finish) {
+	  if (isActualNaN(value) || isActualNaN(start) || isActualNaN(finish)) {
+	    throw new TypeError('NaN is not a valid value');
+	  } else if (!is.number(value) || !is.number(start) || !is.number(finish)) {
+	    throw new TypeError('all arguments must be numbers');
+	  }
+	  var isAnyInfinite = is.infinite(value) || is.infinite(start) || is.infinite(finish);
+	  return isAnyInfinite || (value >= start && value <= finish);
+	};
+	
+	/**
+	 * Test object.
+	 */
+	
+	/**
+	 * is.object
+	 * Test if `value` is an object.
+	 *
+	 * @param {Mixed} value value to test
+	 * @return {Boolean} true if `value` is an object, false otherwise
+	 * @api public
+	 */
+	is.object = function (value) {
+	  return toStr.call(value) === '[object Object]';
+	};
+	
+	/**
+	 * is.primitive
+	 * Test if `value` is a primitive.
+	 *
+	 * @param {Mixed} value value to test
+	 * @return {Boolean} true if `value` is a primitive, false otherwise
+	 * @api public
+	 */
+	is.primitive = function isPrimitive(value) {
+	  if (!value) {
+	    return true;
+	  }
+	  if (typeof value === 'object' || is.object(value) || is.fn(value) || is.array(value)) {
+	    return false;
+	  }
+	  return true;
+	};
+	
+	/**
+	 * is.hash
+	 * Test if `value` is a hash - a plain object literal.
+	 *
+	 * @param {Mixed} value value to test
+	 * @return {Boolean} true if `value` is a hash, false otherwise
+	 * @api public
+	 */
+	
+	is.hash = function (value) {
+	  return is.object(value) && value.constructor === Object && !value.nodeType && !value.setInterval;
+	};
+	
+	/**
+	 * Test regexp.
+	 */
+	
+	/**
+	 * is.regexp
+	 * Test if `value` is a regular expression.
+	 *
+	 * @param {Mixed} value value to test
+	 * @return {Boolean} true if `value` is a regexp, false otherwise
+	 * @api public
+	 */
+	
+	is.regexp = function (value) {
+	  return toStr.call(value) === '[object RegExp]';
+	};
+	
+	/**
+	 * Test string.
+	 */
+	
+	/**
+	 * is.string
+	 * Test if `value` is a string.
+	 *
+	 * @param {Mixed} value value to test
+	 * @return {Boolean} true if 'value' is a string, false otherwise
+	 * @api public
+	 */
+	
+	is.string = function (value) {
+	  return toStr.call(value) === '[object String]';
+	};
+	
+	/**
+	 * Test base64 string.
+	 */
+	
+	/**
+	 * is.base64
+	 * Test if `value` is a valid base64 encoded string.
+	 *
+	 * @param {Mixed} value value to test
+	 * @return {Boolean} true if 'value' is a base64 encoded string, false otherwise
+	 * @api public
+	 */
+	
+	is.base64 = function (value) {
+	  return is.string(value) && (!value.length || base64Regex.test(value));
+	};
+	
+	/**
+	 * Test base64 string.
+	 */
+	
+	/**
+	 * is.hex
+	 * Test if `value` is a valid hex encoded string.
+	 *
+	 * @param {Mixed} value value to test
+	 * @return {Boolean} true if 'value' is a hex encoded string, false otherwise
+	 * @api public
+	 */
+	
+	is.hex = function (value) {
+	  return is.string(value) && (!value.length || hexRegex.test(value));
+	};
+	
+	/**
+	 * is.symbol
+	 * Test if `value` is an ES6 Symbol
+	 *
+	 * @param {Mixed} value value to test
+	 * @return {Boolean} true if `value` is a Symbol, false otherise
+	 * @api public
+	 */
+	
+	is.symbol = function (value) {
+	  return typeof Symbol === 'function' && toStr.call(value) === '[object Symbol]' && typeof symbolValueOf.call(value) === 'symbol';
+	};
+	
+	module.exports = is;
+
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	var _dec, _dec2, _desc, _value, _obj; /*
+	                                       * Copyright (c)  2018 Wise Wild Web .
+	                                       *
+	                                       *  MIT License
+	                                       *
+	                                       *  Permission is hereby granted, free of charge, to any person obtaining a copy
+	                                       *  of this software and associated documentation files (the "Software"), to deal
+	                                       *  in the Software without restriction, including without limitation the rights
+	                                       *  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+	                                       *  copies of the Software, and to permit persons to whom the Software is
+	                                       *  furnished to do so, subject to the following conditions:
+	                                       *
+	                                       *  The above copyright notice and this permission notice shall be included in all
+	                                       *  copies or substantial portions of the Software.
+	                                       *
+	                                       *  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+	                                       *  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+	                                       *  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+	                                       *  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+	                                       *  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+	                                       *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+	                                       *  SOFTWARE.
+	                                       *
+	                                       * @author : Nathanael Braun
+	                                       * @contact : caipilabs@gmail.com
+	                                       */
+	
+	var _is = __webpack_require__(3);
+	
+	var _is2 = _interopRequireDefault(_is);
+	
+	var _rescope = __webpack_require__(2);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	function _applyDecoratedDescriptor(target, property, decorators, descriptor, context) {
+	    var desc = {};
+	    Object['ke' + 'ys'](descriptor).forEach(function (key) {
+	        desc[key] = descriptor[key];
+	    });
+	    desc.enumerable = !!desc.enumerable;
+	    desc.configurable = !!desc.configurable;
+	
+	    if ('value' in desc || desc.initializer) {
+	        desc.writable = true;
+	    }
+	
+	    desc = decorators.slice().reverse().reduce(function (desc, decorator) {
+	        return decorator(target, property, desc) || desc;
+	    }, desc);
+	
+	    if (context && desc.initializer !== void 0) {
+	        desc.value = desc.initializer ? desc.initializer.call(context) : void 0;
+	        desc.initializer = undefined;
+	    }
+	
+	    if (desc.initializer === void 0) {
+	        Object['define' + 'Property'](target, property, desc);
+	        desc = null;
+	    }
+	
+	    return desc;
+	}
+	
+	var all = (_dec = (0, _rescope.isSpell)("stateMap", function (v) {
+	    return _is2.default.object(v) || _is2.default.string(v);
+	}), _dec2 = (0, _rescope.isSpell)("scope", function (v) {
+	    return _is2.default.object(v);
+	}), (_obj = {
+	    stateMap: function stateMap(obj, _ref, ref) {
+	        var _class, _temp;
+	
+	        var cfg = _ref[0];
+	
+	        var use = [],
+	            state = {};
+	        _rescope.Scope.stateMapToRefList(obj, state, use);
+	        return _temp = _class = function (_Store) {
+	            _inherits(StateMap, _Store);
+	
+	            function StateMap() {
+	                _classCallCheck(this, StateMap);
+	
+	                return _possibleConstructorReturn(this, (StateMap.__proto__ || Object.getPrototypeOf(StateMap)).apply(this, arguments));
+	            }
+	
+	            return StateMap;
+	        }(_rescope.Store), _class.use = use, _class.state = state, _class.displayName = ref[1], _temp;
+	    },
+	    scope: function scope(obj, _ref2, ref) {
+	        var cfg = _ref2[0];
+	
+	
+	        return _rescope.Scope.bind(null, obj);
+	    }
+	}, (_applyDecoratedDescriptor(_obj, "stateMap", [_dec], Object.getOwnPropertyDescriptor(_obj, "stateMap"), _obj), _applyDecoratedDescriptor(_obj, "scope", [_dec2], Object.getOwnPropertyDescriptor(_obj, "scope"), _obj)), _obj));
+
+/***/ })
+/******/ ]);
+//# sourceMappingURL=rescopeSpells.js.map

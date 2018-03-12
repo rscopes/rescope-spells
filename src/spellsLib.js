@@ -25,6 +25,24 @@
  * @contact : caipilabs@gmail.com
  */
 
-import "./spellFactory";
-import "./spellsLib";
+import is from "is";
+import {isSpell, spells, Store, Scope} from "rescope";
 
+
+let all = {
+    @isSpell("stateMap", v => (is.object(v) || is.string(v)))
+    stateMap( obj, { 0: cfg }, ref ) {
+        let use = [], state = {};
+        Scope.stateMapToRefList(obj, state, use)
+        return class StateMap extends Store {
+            static use         = use;
+            static state       = state;
+            static displayName = ref[1]
+        }
+    },
+    @isSpell("scope", v => (is.object(v)))
+    scope( obj, { 0: cfg }, ref ) {
+        
+        return Scope.bind(null, obj)
+    }
+}

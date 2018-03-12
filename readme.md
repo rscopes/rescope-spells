@@ -1,6 +1,6 @@
-# rescope-wired (wip)
+# rescope-spells (wip)
 
-[![Build Status](https://travis-ci.org/CaipiLabs/ReScope.svg?branch=master)](https://travis-ci.org/CaipiLabs/rescope-wired)
+[![Build Status](https://travis-ci.org/CaipiLabs/rescope-spells.svg?branch=master)](https://travis-ci.org/CaipiLabs/rescope-spells)
 [![NPM Version](https://badge.fury.io/js/rescope.svg?style=flat)](https://npmjs.org/package/rescope-wired)
 [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](#)
 
