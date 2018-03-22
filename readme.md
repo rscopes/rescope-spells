@@ -1,7 +1,7 @@
 # rescope-spells (wip)
 
 [![Build Status](https://travis-ci.org/CaipiLabs/rescope-spells.svg?branch=master)](https://travis-ci.org/CaipiLabs/rescope-spells)
-[![NPM Version](https://badge.fury.io/js/rescope.svg?style=flat)](https://npmjs.org/package/rescope-wired)
+[![NPM Version](https://badge.fury.io/js/rescope-spells.svg?style=flat)](https://npmjs.org/package/rescope-spells)
 [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](#)
 
 
@@ -84,6 +84,6 @@ export default class MyComp extends Component{
 }
 ```
 
-[![HitCount](http://hits.dwyl.io/caipilabs/Caipilabs/rescope.svg)](http://hits.dwyl.io/caipilabs/Caipilabs/rescope-wired)
+[![HitCount](http://hits.dwyl.io/caipilabs/Caipilabs/rescope-spells.svg)](http://hits.dwyl.io/caipilabs/Caipilabs/rescope-spells)
 <span class="badge-paypal"><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=VWKR3TWQ2U2AC" title="Donate to this project using Paypal"><img src="https://img.shields.io/badge/paypal-donate-yellow.svg" alt="PayPal donate button" /></a></span>
 
