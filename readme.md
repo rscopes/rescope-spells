@@ -58,7 +58,7 @@ or
         @scopeRef
         url    : "appConfig.myMainDataUrl",
         @scopeRef
-        params : "appState"
+        params : "!appState"
        }
        @asStateMap
        appConfig : {

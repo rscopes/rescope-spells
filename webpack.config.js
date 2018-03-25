@@ -37,16 +37,17 @@ var nodeExternals = require('webpack-node-externals');
 module.exports    = [
     {
         entry    : {
-            "rescopeSpells"  : "./src/index.js",
+            "rescopeSpells": "./src/index.js",
         },
         output   : {
-            path      : __dirname,
-            filename  : production ? "dist/[name].min.js" : "dist/[name].js",
-            publicPath: "/",
+            path         : __dirname,
+            filename     : production ? "dist/[name].min.js" : "dist/[name].js",
+            publicPath   : "/",
+            libraryTarget: "commonjs2"
         },
         devtool  : 'source-map',
-        //target   : 'node', // in order to ignore built-in modules like path, fs, etc.
-        externals: [nodeExternals(), 'rescope', 'rescope/dist/index'],
+        target   : 'node', // in order to ignore built-in modules like path, fs, etc.
+        externals: [nodeExternals(), 'rescope', 'rescope/dist/index', 'is'],
         resolve  : {
             extensions: [
                 "",
