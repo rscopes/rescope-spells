@@ -318,8 +318,9 @@ module.exports =
 	        var cfg = _ref[0];
 	
 	        var use = [],
-	            state = {};
-	        _rescope.Scope.stateMapToRefList(obj, state, use);
+	            state = {},
+	            actions = {};
+	        _rescope.Scope.stateMapToRefList(obj, state, use, actions);
 	        return _temp = _class = function (_Store) {
 	            _inherits(StateMap, _Store);
 	
@@ -330,7 +331,7 @@ module.exports =
 	            }
 	
 	            return StateMap;
-	        }(_rescope.Store), _class.use = use, _class.state = state, _class.displayName = ref[1], _temp;
+	        }(_rescope.Store), _class.displayName = ref[1], _class.use = use, _class.state = state, _class.actions = actions, _temp;
 	    },
 	    scope: function scope(obj, _ref2, ref) {
 	        var cfg = _ref2[0];

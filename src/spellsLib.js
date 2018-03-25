@@ -32,12 +32,13 @@ import {isSpell, spells, Store, Scope} from "rescope";
 let all = {
     @isSpell("stateMap", v => (is.object(v) || is.string(v)))
     stateMap( obj, { 0: cfg }, ref ) {
-        let use = [], state = {};
-        Scope.stateMapToRefList(obj, state, use)
+        let use = [], state = {}, actions = {};
+        Scope.stateMapToRefList(obj, state, use, actions)
         return class StateMap extends Store {
+            static displayName = ref[1];
             static use         = use;
             static state       = state;
-            static displayName = ref[1]
+            static actions     = actions;
         }
     },
     @isSpell("scope", v => (is.object(v)))
