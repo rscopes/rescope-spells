@@ -24,7 +24,8 @@
  * @author : Nathanael Braun
  * @contact : caipilabs@gmail.com
  */
-
+import rescope from "rescope";
 import "./spellFactory";
 import "./spellsLib";
 
+export default rescope.spells;
