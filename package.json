@@ -1,6 +1,6 @@
 {
   "name": "rescope-spells",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Chainable rescope stores as decorators collection",
   "repository": "https://github.com/CaipiLabs/rescope-wired.git",
   "license": "MIT",
