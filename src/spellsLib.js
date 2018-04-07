@@ -43,7 +43,6 @@ export default {
     },
     @isSpell("scope", v => ( is.object(v) ))
     scope( obj, { 0: cfg }, ref ) {
-        
         return Scope.bind(null, obj, cfg)
     }
 }

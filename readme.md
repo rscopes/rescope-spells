@@ -1,13 +1,49 @@
-# rescope-spells (wip)
+# rescope-spells
 
 [![Build Status](https://travis-ci.org/CaipiLabs/rescope-spells.svg?branch=master)](https://travis-ci.org/CaipiLabs/rescope-spells)
 [![NPM Version](https://badge.fury.io/js/rescope-spells.svg?style=flat)](https://npmjs.org/package/rescope-spells)
 [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](#)
 
-
 ## What ?
 
 Work in progress collection of chainable stores decorators for [rescope](https://github.com/CaipiLabs/ReScope)
+
+## Examples ?
+
+```jsx
+new Scope(
+    {
+
+        @asStateMap // cast the "myData" object to a Store class named "myData"
+        myData : {
+         @scopeRef // bind some scope refs to (myData).state.url
+         url    : "appConfig.myMainDataUrl",
+         @scopeRef
+         params : "appState"
+
+        }
+        @asStateMap
+        appConfig : {
+            myMainDataUrl : "http://some.where/{%appState.lang}.json
+        }
+        @asStateMap
+        appState : {
+            lang          : 'fr',
+            currentFilter : {
+                name : "Par.*"
+            }
+            someAction(){
+               return {
+                   some:"mutations"
+               }
+            }
+        }
+    },
+    {
+        // cfg ...
+    }
+)
+```
 
 ## Objective ?
 
