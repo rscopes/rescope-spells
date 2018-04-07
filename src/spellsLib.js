@@ -25,24 +25,24 @@
  * @contact : caipilabs@gmail.com
  */
 
-import is from "is";
-import {isSpell, spells, Store, Scope} from "rescope";
+import is                                from "is";
+import { isSpell, spells, Store, Scope } from "rescope";
 
 
-let all = {
-    @isSpell("stateMap", v => (is.object(v) || is.string(v)))
+export default {
+    @isSpell("stateMap", v => ( is.object(v) || is.string(v) ))
     stateMap( obj, { 0: cfg }, ref ) {
-        let use = [], state = {};
-        Scope.stateMapToRefList(obj, state, use)
+        let use = [], state = {}, actions = {};
+        Scope.stateMapToRefList(obj, state, use, actions)
         return class StateMap extends Store {
+            static displayName = ref[ 1 ];
             static use         = use;
             static state       = state;
-            static displayName = ref[1]
+            static actions     = actions;
         }
     },
-    @isSpell("scope", v => (is.object(v)))
+    @isSpell("scope", v => ( is.object(v) ))
     scope( obj, { 0: cfg }, ref ) {
-        
         return Scope.bind(null, obj, cfg)
     }
 }

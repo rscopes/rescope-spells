@@ -1,8 +1,8 @@
 {
   "name": "rescope-spells",
-  "version": "0.1.1",
-  "description": "Chainable rescope stores as decorators collection",
-  "repository": "https://github.com/CaipiLabs/rescope-wired.git",
+  "version": "0.1.4",
+  "description": "Work in progress collection of chainable stores decorators for rescope",
+  "repository": "https://github.com/CaipiLabs/rescope-spells.git",
   "license": "MIT",
   "main": "dist/rescopeSpells.js",
   "author": "Nathan Braun <caipilabs@gmail.com>",
@@ -11,8 +11,7 @@
     "test": "mocha --compilers js:babel-core/register ./test/*.test.js -b"
   },
   "dependencies": {
-    "react-rescope": "^1.1.1",
-    "rescope": "^3.6.1",
+    "rescope": "^3.6.8",
     "prop-types": "^15.6.0"
   },
   "devDependencies": {

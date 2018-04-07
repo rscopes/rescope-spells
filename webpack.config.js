@@ -31,7 +31,7 @@ var glob    = require("glob")
 
 
 var production    = process.argv.indexOf("--production") > -1
-    || process.argv.indexOf("-p") > -1;
+                    || process.argv.indexOf("-p") > -1;
 var nodeExternals = require('webpack-node-externals');
 //console.warn(entries)
 module.exports    = [
@@ -45,9 +45,9 @@ module.exports    = [
             publicPath   : "/",
             libraryTarget: "commonjs2"
         },
-        devtool  : 'source-map',
+        devtool  : !production && 'source-map',
         target   : 'node', // in order to ignore built-in modules like path, fs, etc.
-        externals: [nodeExternals(), 'rescope', 'rescope/dist/index', 'is'],
+        externals: [ nodeExternals() ],
         resolve  : {
             extensions: [
                 "",
