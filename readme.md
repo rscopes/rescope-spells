@@ -22,10 +22,12 @@ new Scope(
          params : "appState"
 
         }
+
         @asStateMap
         appConfig : {
             myMainDataUrl : "http://some.where/{%appState.lang}.json
         }
+
         @asStateMap
         appState : {
             lang          : 'fr',
