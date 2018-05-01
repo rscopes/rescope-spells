@@ -379,7 +379,6 @@ module.exports =
 	    scope: function scope(obj, _ref2, ref) {
 	        var cfg = _ref2[0];
 	
-	
 	        return _rescope.Scope.bind(null, obj, cfg);
 	    }
 	}, (_applyDecoratedDescriptor(_obj, "stateMap", [_dec], Object.getOwnPropertyDescriptor(_obj, "stateMap"), _obj), _applyDecoratedDescriptor(_obj, "scope", [_dec2], Object.getOwnPropertyDescriptor(_obj, "scope"), _obj)), _obj));
