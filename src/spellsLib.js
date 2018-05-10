@@ -25,8 +25,8 @@
  * @contact : caipilabs@gmail.com
  */
 
-import is                                from "is";
-import { isSpell, spells, Store, Scope } from "rescope";
+import is                                           from "is";
+import { isSpell, spells, Store, Scope, Component } from "react-rescope";
 
 
 export default {
@@ -44,5 +44,31 @@ export default {
     @isSpell("scope", v => ( is.object(v) ))
     scope( obj, { 0: cfg }, ref ) {
         return Scope.bind(null, obj, cfg)
+    },
+    @isSpell("renderer", v => ( is.fn(v) ))
+    renderer( obj, { 0: use }, ref ) {
+        debugger
+        return ( scope, opts ) => new Store(
+            scope,
+            {
+                ...opts,
+                use,
+                apply: function ( d, s, c ) {
+                    return <Component __scope={ scope }>
+                        {
+                            obj(s, {
+                                $actions: this.$actions,
+                                $stores : this.$stores,
+                                $store  : this
+                            })
+                        }
+                    </Component>;
+                }
+            }
+        )
+    },
+    @isSpell("store", v => ( is.fn(v) ))
+    store( obj, { 0: cfg }, ref ) {
+        return Store.bind(null, obj, { ...cfg, apply: ( d, s, c ) => obj(d, s, c) })
     }
 }

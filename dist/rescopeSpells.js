@@ -280,38 +280,40 @@ module.exports =
 	    value: true
 	});
 	
-	var _dec, _dec2, _desc, _value, _obj; /*
-	                                       * Copyright (c)  2018 Wise Wild Web .
-	                                       *
-	                                       *  MIT License
-	                                       *
-	                                       *  Permission is hereby granted, free of charge, to any person obtaining a copy
-	                                       *  of this software and associated documentation files (the "Software"), to deal
-	                                       *  in the Software without restriction, including without limitation the rights
-	                                       *  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-	                                       *  copies of the Software, and to permit persons to whom the Software is
-	                                       *  furnished to do so, subject to the following conditions:
-	                                       *
-	                                       *  The above copyright notice and this permission notice shall be included in all
-	                                       *  copies or substantial portions of the Software.
-	                                       *
-	                                       *  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-	                                       *  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-	                                       *  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-	                                       *  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-	                                       *  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-	                                       *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-	                                       *  SOFTWARE.
-	                                       *
-	                                       * @author : Nathanael Braun
-	                                       * @contact : caipilabs@gmail.com
-	                                       */
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _dec, _dec2, _dec3, _dec4, _desc, _value, _obj; /*
+	                                                     * Copyright (c)  2018 Wise Wild Web .
+	                                                     *
+	                                                     *  MIT License
+	                                                     *
+	                                                     *  Permission is hereby granted, free of charge, to any person obtaining a copy
+	                                                     *  of this software and associated documentation files (the "Software"), to deal
+	                                                     *  in the Software without restriction, including without limitation the rights
+	                                                     *  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+	                                                     *  copies of the Software, and to permit persons to whom the Software is
+	                                                     *  furnished to do so, subject to the following conditions:
+	                                                     *
+	                                                     *  The above copyright notice and this permission notice shall be included in all
+	                                                     *  copies or substantial portions of the Software.
+	                                                     *
+	                                                     *  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+	                                                     *  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+	                                                     *  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+	                                                     *  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+	                                                     *  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+	                                                     *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+	                                                     *  SOFTWARE.
+	                                                     *
+	                                                     * @author : Nathanael Braun
+	                                                     * @contact : caipilabs@gmail.com
+	                                                     */
 	
 	var _is = __webpack_require__(3);
 	
 	var _is2 = _interopRequireDefault(_is);
 	
-	var _rescope = __webpack_require__(1);
+	var _reactRescope = __webpack_require__(5);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -350,10 +352,14 @@ module.exports =
 	    return desc;
 	}
 	
-	exports.default = (_dec = (0, _rescope.isSpell)("stateMap", function (v) {
+	exports.default = (_dec = (0, _reactRescope.isSpell)("stateMap", function (v) {
 	    return _is2.default.object(v) || _is2.default.string(v);
-	}), _dec2 = (0, _rescope.isSpell)("scope", function (v) {
+	}), _dec2 = (0, _reactRescope.isSpell)("scope", function (v) {
 	    return _is2.default.object(v);
+	}), _dec3 = (0, _reactRescope.isSpell)("renderer", function (v) {
+	    return _is2.default.fn(v);
+	}), _dec4 = (0, _reactRescope.isSpell)("store", function (v) {
+	    return _is2.default.fn(v);
 	}), (_obj = {
 	    stateMap: function stateMap(obj, _ref, ref) {
 	        var _class, _temp;
@@ -363,7 +369,7 @@ module.exports =
 	        var use = [],
 	            state = {},
 	            actions = {};
-	        _rescope.Scope.stateMapToRefList(obj, state, use, actions);
+	        _reactRescope.Scope.stateMapToRefList(obj, state, use, actions);
 	        return _temp = _class = function (_Store) {
 	            _inherits(StateMap, _Store);
 	
@@ -374,15 +380,49 @@ module.exports =
 	            }
 	
 	            return StateMap;
-	        }(_rescope.Store), _class.displayName = ref[1], _class.use = use, _class.state = state, _class.actions = actions, _temp;
+	        }(_reactRescope.Store), _class.displayName = ref[1], _class.use = use, _class.state = state, _class.actions = actions, _temp;
 	    },
 	    scope: function scope(obj, _ref2, ref) {
 	        var cfg = _ref2[0];
 	
-	        return _rescope.Scope.bind(null, obj, cfg);
+	        return _reactRescope.Scope.bind(null, obj, cfg);
+	    },
+	    renderer: function renderer(obj, _ref3, ref) {
+	        var use = _ref3[0];
+	
+	        debugger;
+	        return function (scope, opts) {
+	            return new _reactRescope.Store(scope, _extends({}, opts, {
+	                use: use,
+	                apply: function apply(d, s, c) {
+	                    return React.createElement(
+	                        _reactRescope.Component,
+	                        { __scope: scope },
+	                        obj(s, {
+	                            $actions: this.$actions,
+	                            $stores: this.$stores,
+	                            $store: this
+	                        })
+	                    );
+	                }
+	            }));
+	        };
+	    },
+	    store: function store(obj, _ref4, ref) {
+	        var cfg = _ref4[0];
+	
+	        return _reactRescope.Store.bind(null, obj, _extends({}, cfg, { apply: function apply(d, s, c) {
+	                return obj(d, s, c);
+	            } }));
 	    }
-	}, (_applyDecoratedDescriptor(_obj, "stateMap", [_dec], Object.getOwnPropertyDescriptor(_obj, "stateMap"), _obj), _applyDecoratedDescriptor(_obj, "scope", [_dec2], Object.getOwnPropertyDescriptor(_obj, "scope"), _obj)), _obj));
+	}, (_applyDecoratedDescriptor(_obj, "stateMap", [_dec], Object.getOwnPropertyDescriptor(_obj, "stateMap"), _obj), _applyDecoratedDescriptor(_obj, "scope", [_dec2], Object.getOwnPropertyDescriptor(_obj, "scope"), _obj), _applyDecoratedDescriptor(_obj, "renderer", [_dec3], Object.getOwnPropertyDescriptor(_obj, "renderer"), _obj), _applyDecoratedDescriptor(_obj, "store", [_dec4], Object.getOwnPropertyDescriptor(_obj, "store"), _obj)), _obj));
 	module.exports = exports["default"];
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports) {
+
+	module.exports = require("react-rescope");
 
 /***/ })
 /******/ ]);
