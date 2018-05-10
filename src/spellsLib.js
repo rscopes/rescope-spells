@@ -83,7 +83,7 @@ export default {
                 return ( props ) =>
                     <RSComp __scope={ this.$scope } props={ props }>
                         {
-                            obj({ ...s, props }, {
+                            obj({ ...this.state, props }, {
                                 $actions: this.$actions,
                                 $stores : this.$stores,
                                 $store  : this
@@ -118,15 +118,19 @@ export default {
             static actions     = actions;
             
             apply( d, s, c ) {
-                return <RSComp __scope={ this.$scope }>
-                        {
-                            obj(s, {
-                                $actions: this.$actions,
-                                $stores : this.$stores,
-                                $store  : this
-                            })
-                        }
-                    </RSComp>;
+                if ( d ) {
+                    this._comp.setState(c);
+                    return d;
+                }
+                return <RSComp __scope={ this.$scope } ref={(comp)=>(this._comp=comp)}>
+                    {
+                        obj(s, {
+                            $actions: this.$actions,
+                            $stores : this.$stores,
+                            $store  : this
+                        })
+                    }
+                </RSComp>;
             }
         }
     },
