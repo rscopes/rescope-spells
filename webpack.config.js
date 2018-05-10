@@ -45,7 +45,7 @@ module.exports    = [
             publicPath   : "/",
             libraryTarget: "commonjs2"
         },
-        devtool  : !production && 'source-map',
+        devtool  : 'source-map',
         target   : 'node', // in order to ignore built-in modules like path, fs, etc.
         externals: [ nodeExternals(), 'react' ],
         resolve  : {
