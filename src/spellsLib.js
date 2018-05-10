@@ -24,10 +24,20 @@
  * @author : Nathanael Braun
  * @contact : caipilabs@gmail.com
  */
+import React from "react";
 
-import is                                           from "is";
-import { isSpell, spells, Store, Scope, Component } from "react-rescope";
+import is from "is";
+import {
+    isSpell, spells, Store, Scope, propsToScope, scopeToProps, Component
+}         from "react-rescope";
 
+@propsToScope([ 'props' ])
+@scopeToProps([ 'props' ])
+class RSComp extends Component {
+    render() {
+        return this.props.children || [];
+    }
+}
 
 export default {
     @isSpell("stateMap", v => ( is.object(v) || is.string(v) ))
@@ -46,15 +56,69 @@ export default {
         return Scope.bind(null, obj, cfg)
     },
     @isSpell("renderer", v => ( is.fn(v) ))
-    renderer( obj, { 0: use }, ref ) {
-        debugger
-        return ( scope, opts ) => new Store(
-            scope,
-            {
-                ...opts,
-                use,
-                apply: function ( d, s, c ) {
-                    return <Component __scope={ scope }>
+    renderer( obj, argz, ref ) {
+        
+        let use,
+            state,
+            actions;
+        if ( !argz[ 0 ] ) {
+            state = {};
+            //argz[ 0 ] = []
+        }
+        else if ( is.array(argz[ 0 ]) ) {
+            use   = argz[ 0 ];
+            state = !use.length && {};
+        }
+        else
+            argz[ 0 ] && Scope.stateMapToRefList(argz[ 0 ], state = {}, use = [], actions = {});
+        
+        //!use.includes('props') && use.push('props');
+        return class RSRenderer extends Store {
+            static displayName = ref[ 1 ];
+            static use         = use;
+            static state       = state;
+            static actions     = actions;
+            
+            apply( d, s, c ) {
+                return ( props ) =>
+                    <RSComp __scope={ this.$scope } props={ props }>
+                        {
+                            obj({ ...s, props }, {
+                                $actions: this.$actions,
+                                $stores : this.$stores,
+                                $store  : this
+                            })
+                        }
+                    </RSComp>;
+            }
+        }
+    },
+    @isSpell("rootRenderer", v => ( is.fn(v) ))
+    rootRenderer( obj, argz, ref ) {
+        
+        let use,
+            state,
+            actions;
+        if ( !argz[ 0 ] ) {
+            state = {};
+            //argz[ 0 ] = []
+        }
+        else if ( is.array(argz[ 0 ]) ) {
+            use   = argz[ 0 ];
+            state = !use.length && {};
+        }
+        else
+            argz[ 0 ] && Scope.stateMapToRefList(argz[ 0 ], state = {}, use = [], actions = {});
+        
+        //!use.includes('props') && use.push('props');
+        return class RSRenderer extends Store {
+            static displayName = ref[ 1 ];
+            static use         = use;
+            static state       = state;
+            static actions     = actions;
+            
+            apply( d, s, c ) {
+                return <RSComp __scope={ this.$scope }>
                         {
                             obj(s, {
                                 $actions: this.$actions,
@@ -62,10 +126,9 @@ export default {
                                 $store  : this
                             })
                         }
-                    </Component>;
-                }
+                    </RSComp>;
             }
-        )
+        }
     },
     @isSpell("store", v => ( is.fn(v) ))
     store( obj, { 0: cfg }, ref ) {

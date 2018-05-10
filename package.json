@@ -10,9 +10,14 @@
     "build": "webpack",
     "test": "mocha --compilers js:babel-core/register ./test/*.test.js -b"
   },
+  "peerDependencies": {
+    "prop-types": "^15.5.10",
+    "react-dom": "^16.3.2",
+    "react": "^16.3.2",
+    "react-rescope": "^1.1.9"
+  },
   "dependencies": {
-    "rescope": "^3.6.8",
-    "prop-types": "^15.6.0"
+    "rescope": "^3.6.8"
   },
   "devDependencies": {
     "babel-cli": "^6.14.0",
