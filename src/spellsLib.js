@@ -54,7 +54,11 @@ let Lib = {
     },
     @isSpell("scope", v => ( is.object(v) ))
     scope( obj, { 0: cfg }, ref ) {
-        return Scope.bind(null, obj, cfg)
+        return class childScope extends Scope {
+            constructor( map, cfg2 ) {
+                super({ ...obj, ...map }, { ...cfg, ...cfg2 });
+            }
+        }
     },
     @isSpell("renderer", v => ( is.fn(v) ))
     renderer( obj, argz, ref ) {

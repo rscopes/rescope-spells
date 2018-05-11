@@ -80,7 +80,7 @@ module.exports =
 	
 	__webpack_require__(2);
 	
-	__webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./spellsLib\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	__webpack_require__(4);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -269,6 +269,317 @@ module.exports =
 /***/ (function(module, exports) {
 
 	module.exports = require("is");
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _dec, _dec2, _class, _dec3, _dec4, _dec5, _dec6, _dec7, _desc, _value, _obj; /*
+	                                                                                  * Copyright (c)  2018 Wise Wild Web .
+	                                                                                  *
+	                                                                                  *  MIT License
+	                                                                                  *
+	                                                                                  *  Permission is hereby granted, free of charge, to any person obtaining a copy
+	                                                                                  *  of this software and associated documentation files (the "Software"), to deal
+	                                                                                  *  in the Software without restriction, including without limitation the rights
+	                                                                                  *  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+	                                                                                  *  copies of the Software, and to permit persons to whom the Software is
+	                                                                                  *  furnished to do so, subject to the following conditions:
+	                                                                                  *
+	                                                                                  *  The above copyright notice and this permission notice shall be included in all
+	                                                                                  *  copies or substantial portions of the Software.
+	                                                                                  *
+	                                                                                  *  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+	                                                                                  *  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+	                                                                                  *  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+	                                                                                  *  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+	                                                                                  *  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+	                                                                                  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+	                                                                                  *  SOFTWARE.
+	                                                                                  *
+	                                                                                  * @author : Nathanael Braun
+	                                                                                  * @contact : caipilabs@gmail.com
+	                                                                                  */
+	
+	
+	var _react = __webpack_require__(5);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _is = __webpack_require__(3);
+	
+	var _is2 = _interopRequireDefault(_is);
+	
+	var _reactRescope = __webpack_require__(6);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+	
+	function _applyDecoratedDescriptor(target, property, decorators, descriptor, context) {
+	    var desc = {};
+	    Object['ke' + 'ys'](descriptor).forEach(function (key) {
+	        desc[key] = descriptor[key];
+	    });
+	    desc.enumerable = !!desc.enumerable;
+	    desc.configurable = !!desc.configurable;
+	
+	    if ('value' in desc || desc.initializer) {
+	        desc.writable = true;
+	    }
+	
+	    desc = decorators.slice().reverse().reduce(function (desc, decorator) {
+	        return decorator(target, property, desc) || desc;
+	    }, desc);
+	
+	    if (context && desc.initializer !== void 0) {
+	        desc.value = desc.initializer ? desc.initializer.call(context) : void 0;
+	        desc.initializer = undefined;
+	    }
+	
+	    if (desc.initializer === void 0) {
+	        Object['define' + 'Property'](target, property, desc);
+	        desc = null;
+	    }
+	
+	    return desc;
+	}
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var RSComp = (_dec = (0, _reactRescope.propsToScope)(['props']), _dec2 = (0, _reactRescope.scopeToProps)(['props']), _dec(_class = _dec2(_class = function (_Component) {
+	    _inherits(RSComp, _Component);
+	
+	    function RSComp() {
+	        _classCallCheck(this, RSComp);
+	
+	        return _possibleConstructorReturn(this, (RSComp.__proto__ || Object.getPrototypeOf(RSComp)).apply(this, arguments));
+	    }
+	
+	    _createClass(RSComp, [{
+	        key: "render",
+	        value: function render() {
+	            return this.props.children || [];
+	        }
+	    }]);
+	
+	    return RSComp;
+	}(_reactRescope.Component)) || _class) || _class);
+	
+	
+	var Lib = (_dec3 = (0, _reactRescope.isSpell)("stateMap", function (v) {
+	    return _is2.default.object(v) || _is2.default.string(v);
+	}), _dec4 = (0, _reactRescope.isSpell)("scope", function (v) {
+	    return _is2.default.object(v);
+	}), _dec5 = (0, _reactRescope.isSpell)("renderer", function (v) {
+	    return _is2.default.fn(v);
+	}), _dec6 = (0, _reactRescope.isSpell)("rootRenderer", function (v) {
+	    return _is2.default.fn(v);
+	}), _dec7 = (0, _reactRescope.isSpell)("store", function (v) {
+	    return _is2.default.fn(v);
+	}), (_obj = {
+	    stateMap: function stateMap(obj, _ref, ref) {
+	        var _class2, _temp;
+	
+	        var cfg = _ref[0];
+	
+	        var use = [],
+	            state = {},
+	            actions = {};
+	        _reactRescope.Scope.stateMapToRefList(obj, state, use, actions);
+	        return _temp = _class2 = function (_Store) {
+	            _inherits(StateMap, _Store);
+	
+	            function StateMap() {
+	                _classCallCheck(this, StateMap);
+	
+	                return _possibleConstructorReturn(this, (StateMap.__proto__ || Object.getPrototypeOf(StateMap)).apply(this, arguments));
+	            }
+	
+	            return StateMap;
+	        }(_reactRescope.Store), _class2.displayName = ref[1], _class2.use = use, _class2.state = state, _class2.actions = actions, _temp;
+	    },
+	    scope: function scope(obj, _ref2, ref) {
+	        var cfg = _ref2[0];
+	
+	        return function (_Scope) {
+	            _inherits(childScope, _Scope);
+	
+	            function childScope(map, cfg2) {
+	                _classCallCheck(this, childScope);
+	
+	                return _possibleConstructorReturn(this, (childScope.__proto__ || Object.getPrototypeOf(childScope)).call(this, _extends({}, obj, map), _extends({}, cfg, cfg2)));
+	            }
+	
+	            return childScope;
+	        }(_reactRescope.Scope);
+	    },
+	    renderer: function renderer(obj, argz, ref) {
+	        var _class3, _temp2;
+	
+	        var use = void 0,
+	            state = void 0,
+	            actions = void 0;
+	        //if ( !argz[ 0 ] ) {
+	        state = {};
+	        //argz[ 0 ] = []
+	        //}
+	        //else if ( is.array(argz[ 0 ]) ) {
+	        //    use   = argz[ 0 ];
+	        //    state = !use.length && {};
+	        //}
+	        //else
+	        //    argz[ 0 ] && Scope.stateMapToRefList(argz[ 0 ], state = {}, use = [],
+	        // actions = {});
+	
+	        //!use.includes('props') && use.push('props');
+	        return _temp2 = _class3 = function (_Store2) {
+	            _inherits(RSRenderer, _Store2);
+	
+	            function RSRenderer() {
+	                _classCallCheck(this, RSRenderer);
+	
+	                return _possibleConstructorReturn(this, (RSRenderer.__proto__ || Object.getPrototypeOf(RSRenderer)).apply(this, arguments));
+	            }
+	
+	            _createClass(RSRenderer, [{
+	                key: "apply",
+	
+	
+	                //static actions     = actions;
+	
+	                value: function apply(d, s, c) {
+	                    var _dec8,
+	                        _this5 = this,
+	                        _class4;
+	
+	                    if (d) {
+	                        //this._comp.setState(c);
+	                        return d;
+	                    }
+	                    var scope,
+	                        asRootRenderer = _reactRescope.spells.asRootRenderer;
+	
+	                    var RSCompRenderer = (_dec8 = (0, _reactRescope.scopeToState)(function (comp, props, ctx) {
+	                        return new _reactRescope.Scope(_defineProperty({}, RSRenderer.displayName, Lib.rootRenderer(obj, argz, [, RSRenderer.displayName])), {
+	                            parent: _this5.$scope,
+	                            autoDestroy: true,
+	                            state: _defineProperty({}, RSRenderer.displayName, { props: props })
+	                        });
+	                    }, [RSRenderer.displayName]), _dec8(_class4 = function (_React$Component) {
+	                        _inherits(RSCompRenderer, _React$Component);
+	
+	                        function RSCompRenderer() {
+	                            _classCallCheck(this, RSCompRenderer);
+	
+	                            return _possibleConstructorReturn(this, (RSCompRenderer.__proto__ || Object.getPrototypeOf(RSCompRenderer)).apply(this, arguments));
+	                        }
+	
+	                        _createClass(RSCompRenderer, [{
+	                            key: "componentWillReceiveProps",
+	                            value: function componentWillReceiveProps(props) {
+	                                var Comp = this.$stores[RSRenderer.displayName];
+	
+	                                Comp && Comp.setState({ props: props });
+	                            }
+	                        }, {
+	                            key: "render",
+	                            value: function render() {
+	                                var Comp = this.state[RSRenderer.displayName];
+	                                return Comp || _react2.default.createElement("span", { className: "__rsLoad" });
+	                            }
+	                        }]);
+	
+	                        return RSCompRenderer;
+	                    }(_react2.default.Component)) || _class4);
+	
+	
+	                    return RSCompRenderer;
+	                }
+	            }]);
+	
+	            return RSRenderer;
+	        }(_reactRescope.Store), _class3.displayName = ref[1], _class3.use = use, _class3.state = state, _temp2;
+	    },
+	    rootRenderer: function rootRenderer(obj, argz, ref) {
+	        var _class5, _temp3;
+	
+	        var use = void 0,
+	            state = void 0,
+	            actions = void 0;
+	        if (!argz[0]) {
+	            state = {};
+	            //argz[ 0 ] = []
+	        } else if (_is2.default.array(argz[0])) {
+	            use = argz[0];
+	            state = !use.length && {};
+	        } else argz[0] && _reactRescope.Scope.stateMapToRefList(argz[0], state = {}, use = [], actions = {});
+	
+	        //!use.includes('props') && use.push('props');
+	        return _temp3 = _class5 = function (_Store3) {
+	            _inherits(RSRenderer, _Store3);
+	
+	            function RSRenderer() {
+	                _classCallCheck(this, RSRenderer);
+	
+	                return _possibleConstructorReturn(this, (RSRenderer.__proto__ || Object.getPrototypeOf(RSRenderer)).apply(this, arguments));
+	            }
+	
+	            _createClass(RSRenderer, [{
+	                key: "apply",
+	                value: function apply(d, s, c) {
+	                    //if ( d ) {
+	                    //    this._comp.setState(c);
+	                    //    return d;
+	                    //}
+	                    return obj(s, {
+	                        $actions: this.$actions,
+	                        $stores: this.$stores,
+	                        $store: this
+	                    });
+	                }
+	            }]);
+	
+	            return RSRenderer;
+	        }(_reactRescope.Store), _class5.displayName = ref[1], _class5.use = use, _class5.state = state, _class5.actions = actions, _temp3;
+	    },
+	    store: function store(obj, _ref4, ref) {
+	        var cfg = _ref4[0];
+	
+	        return _reactRescope.Store.bind(null, obj, _extends({}, cfg, { apply: function apply(d, s, c) {
+	                return obj(d, s, c);
+	            } }));
+	    }
+	}, (_applyDecoratedDescriptor(_obj, "stateMap", [_dec3], Object.getOwnPropertyDescriptor(_obj, "stateMap"), _obj), _applyDecoratedDescriptor(_obj, "scope", [_dec4], Object.getOwnPropertyDescriptor(_obj, "scope"), _obj), _applyDecoratedDescriptor(_obj, "renderer", [_dec5], Object.getOwnPropertyDescriptor(_obj, "renderer"), _obj), _applyDecoratedDescriptor(_obj, "rootRenderer", [_dec6], Object.getOwnPropertyDescriptor(_obj, "rootRenderer"), _obj), _applyDecoratedDescriptor(_obj, "store", [_dec7], Object.getOwnPropertyDescriptor(_obj, "store"), _obj)), _obj));
+	
+	exports.default = Lib;
+	module.exports = exports["default"];
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports) {
+
+	module.exports = require("react");
+
+/***/ }),
+/* 6 */
+/***/ (function(module, exports) {
+
+	module.exports = require("react-rescope");
 
 /***/ })
 /******/ ]);
