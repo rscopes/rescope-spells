@@ -100,6 +100,7 @@ let Lib = {
                                 [ RSRenderer.displayName ]: Lib.rootRenderer(obj, argz, [ , RSRenderer.displayName ])
                             },
                             {
+                                key        : RSRenderer.displayName,
                                 parent     : this.$scope,
                                 autoDestroy: true,
                                 state      : { [ RSRenderer.displayName ]: { props } }

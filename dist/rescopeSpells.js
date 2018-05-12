@@ -476,6 +476,7 @@ module.exports =
 	
 	                    var RSCompRenderer = (_dec8 = (0, _reactRescope.scopeToState)(function (comp, props, ctx) {
 	                        return new _reactRescope.Scope(_defineProperty({}, RSRenderer.displayName, Lib.rootRenderer(obj, argz, [, RSRenderer.displayName])), {
+	                            key: RSRenderer.displayName,
 	                            parent: _this5.$scope,
 	                            autoDestroy: true,
 	                            state: _defineProperty({}, RSRenderer.displayName, { props: props })
