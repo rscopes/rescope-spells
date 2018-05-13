@@ -280,6 +280,8 @@ module.exports =
 	    value: true
 	});
 	
+	var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
+	
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -433,7 +435,8 @@ module.exports =
 	
 	        var use = void 0,
 	            state = void 0,
-	            actions = void 0;
+	            scope = argz[1] && argz[0],
+	            sm = argz[1] || argz[0];
 	        //if ( !argz[ 0 ] ) {
 	        state = {};
 	        //argz[ 0 ] = []
@@ -450,18 +453,59 @@ module.exports =
 	        return _temp2 = _class3 = function (_Store2) {
 	            _inherits(RSRenderer, _Store2);
 	
-	            function RSRenderer() {
+	            function RSRenderer(scope, cfg) {
 	                _classCallCheck(this, RSRenderer);
 	
-	                return _possibleConstructorReturn(this, (RSRenderer.__proto__ || Object.getPrototypeOf(RSRenderer)).apply(this, arguments));
+	                var _this4 = _possibleConstructorReturn(this, (RSRenderer.__proto__ || Object.getPrototypeOf(RSRenderer)).apply(this, arguments));
+	
+	                _this4._compScope = new _reactRescope.Scope({}, {
+	                    key: RSRenderer.displayName,
+	                    parent: _this4.$scope,
+	                    autoDestroy: true
+	
+	                });
+	
+	                _this4._compScope.retain("RSRenderer");
+	                _this4.__snapshot = cfg.snapshot;
+	                return _this4;
 	            }
 	
-	            _createClass(RSRenderer, [{
-	                key: "apply",
+	            //static actions     = actions;
 	
+	            //static use         = use;
+	
+	
+	            _createClass(RSRenderer, [{
+	                key: "serialize",
+	                value: function serialize(cfg, output) {
+	                    var _compScope;
+	
+	                    _get(RSRenderer.prototype.__proto__ || Object.getPrototypeOf(RSRenderer.prototype), "serialize", this).apply(this, arguments);
+	                    (_compScope = this._compScope).serialize.apply(_compScope, arguments);
+	                    return output;
+	                }
 	
 	                //static actions     = actions;
 	
+	            }, {
+	                key: "restore",
+	                value: function restore() {
+	                    var _compScope2;
+	
+	                    _get(RSRenderer.prototype.__proto__ || Object.getPrototypeOf(RSRenderer.prototype), "restore", this).apply(this, arguments);
+	                    (_compScope2 = this._compScope).restore.apply(_compScope2, arguments);
+	                }
+	
+	                //static actions     = actions;
+	
+	            }, {
+	                key: "destroy",
+	                value: function destroy() {
+	                    this._compScope.dispose("RSRenderer");
+	                    _get(RSRenderer.prototype.__proto__ || Object.getPrototypeOf(RSRenderer.prototype), "destroy", this).call(this);
+	                }
+	            }, {
+	                key: "apply",
 	                value: function apply(d, s, c) {
 	                    var _dec8,
 	                        _this5 = this,
@@ -471,16 +515,17 @@ module.exports =
 	                        //this._comp.setState(c);
 	                        return d;
 	                    }
-	                    var scope,
-	                        asRootRenderer = _reactRescope.spells.asRootRenderer;
 	
 	                    var RSCompRenderer = (_dec8 = (0, _reactRescope.scopeToState)(function (comp, props, ctx) {
-	                        return new _reactRescope.Scope(_defineProperty({}, RSRenderer.displayName, Lib.rootRenderer(obj, argz, [, RSRenderer.displayName])), {
-	                            key: RSRenderer.displayName,
-	                            parent: _this5.$scope,
+	                        var viewScope = new _reactRescope.Scope(_extends(_defineProperty({}, RSRenderer.displayName, Lib.rootRenderer(obj, [sm], [, RSRenderer.displayName])), scope || {}), {
+	                            key: "comp",
+	                            parent: _this5._compScope,
 	                            autoDestroy: true,
+	
 	                            state: _defineProperty({}, RSRenderer.displayName, { props: props })
 	                        });
+	                        if (_this5.__snapshot) viewScope.restore(_this5.__snapshot);
+	                        return viewScope;
 	                    }, [RSRenderer.displayName]), _dec8(_class4 = function (_React$Component) {
 	                        _inherits(RSCompRenderer, _React$Component);
 	
@@ -495,7 +540,7 @@ module.exports =
 	                            value: function componentWillReceiveProps(props) {
 	                                var Comp = this.$stores[RSRenderer.displayName];
 	
-	                                Comp && Comp.setState({ props: props });
+	                                //Comp && Comp.setState({ props });
 	                            }
 	                        }, {
 	                            key: "render",
@@ -514,7 +559,7 @@ module.exports =
 	            }]);
 	
 	            return RSRenderer;
-	        }(_reactRescope.Store), _class3.displayName = ref[1], _class3.use = use, _class3.state = state, _temp2;
+	        }(_reactRescope.Store), _class3.displayName = ref[1], _class3.state = state, _temp2;
 	    },
 	    rootRenderer: function rootRenderer(obj, argz, ref) {
 	        var _class5, _temp3;
@@ -541,25 +586,38 @@ module.exports =
 	            }
 	
 	            _createClass(RSRenderer, [{
+	                key: "serialize",
+	
+	
+	                //static actions     = actions;
+	                value: function serialize(cfg, output) {
+	                    _get(RSRenderer.prototype.__proto__ || Object.getPrototypeOf(RSRenderer.prototype), "serialize", this).apply(this, arguments);
+	                    var snap = this.scopeObj.getSnapshotByKeyExt(output, this.$scope._id + '/' + this.name);
+	                    if (snap.state && snap.state.props) delete snap.state.props;
+	                    delete snap.data;
+	                    return output;
+	                }
+	            }, {
 	                key: "apply",
 	                value: function apply(d, s, c) {
 	                    //if ( d ) {
-	                    //    this._comp.setState(c);
+	                    //    //this._comp.setState(c);
 	                    //    return d;
 	                    //}
 	                    return obj(s, {
 	                        $actions: this.$actions,
 	                        $stores: this.$stores,
+	                        $scope: this.$scope,
 	                        $store: this
 	                    });
 	                }
 	            }]);
 	
 	            return RSRenderer;
-	        }(_reactRescope.Store), _class5.displayName = ref[1], _class5.use = use, _class5.state = state, _class5.actions = actions, _temp3;
+	        }(_reactRescope.Store), _class5.displayName = ref[1], _class5.use = use, _class5.state = state || {}, _class5.actions = actions, _temp3;
 	    },
-	    store: function store(obj, _ref4, ref) {
-	        var cfg = _ref4[0];
+	    store: function store(obj, _ref3, ref) {
+	        var cfg = _ref3[0];
 	
 	        return _reactRescope.Store.bind(null, obj, _extends({}, cfg, { apply: function apply(d, s, c) {
 	                return obj(d, s, c);

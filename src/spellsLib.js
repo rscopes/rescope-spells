@@ -62,12 +62,12 @@ let Lib = {
     },
     @isSpell("renderer", v => ( is.fn(v) ))
     renderer( obj, argz, ref ) {
-        
         let use,
             state,
-            actions;
+            scope = argz[ 1 ] && argz[ 0 ],
+            sm    = argz[ 1 ] || argz[ 0 ];
         //if ( !argz[ 0 ] ) {
-        state = {};
+        state     = {};
         //argz[ 0 ] = []
         //}
         //else if ( is.array(argz[ 0 ]) ) {
@@ -81,38 +81,75 @@ let Lib = {
         //!use.includes('props') && use.push('props');
         return class RSRenderer extends Store {
             static displayName = ref[ 1 ];
-            static use         = use;
+            //static use         = use;
             static state       = state;
             
+            constructor( scope, cfg ) {
+                super(...arguments);
+                this._compScope = new Scope(
+                    {},
+                    {
+                        key        : RSRenderer.displayName,
+                        parent     : this.$scope,
+                        autoDestroy: true,
+                        
+                    }
+                )
+                
+                this._compScope.retain("RSRenderer");
+                this.__snapshot = cfg.snapshot;
+            }
+            
             //static actions     = actions;
+            serialize( cfg, output ) {
+                super.serialize(...arguments)
+                this._compScope.serialize(...arguments)
+                return output;
+            }
+            
+            //static actions     = actions;
+            restore() {
+                super.restore(...arguments)
+                this._compScope.restore(...arguments)
+            }
+            
+            //static actions     = actions;
+            destroy() {
+                this._compScope.dispose("RSRenderer");
+                super.destroy();
+            }
             
             apply( d, s, c ) {
                 if ( d ) {
                     //this._comp.setState(c);
                     return d;
                 }
-                var scope, asRootRenderer = spells.asRootRenderer;
                 
                 @scopeToState(
                     ( comp, props, ctx ) => {
-                        return new Scope(
+                        let viewScope = new Scope(
                             {
-                                [ RSRenderer.displayName ]: Lib.rootRenderer(obj, argz, [ , RSRenderer.displayName ])
+                                [ RSRenderer.displayName ]: Lib.rootRenderer(obj, [ sm ], [ , RSRenderer.displayName ]),
+                                ...( scope || {} )
                             },
                             {
-                                key        : RSRenderer.displayName,
-                                parent     : this.$scope,
+                                key        : "comp",
+                                parent     : this._compScope,
                                 autoDestroy: true,
-                                state      : { [ RSRenderer.displayName ]: { props } }
+                                
+                                state: { [ RSRenderer.displayName ]: { props } }
                             }
                         )
+                        if ( this.__snapshot )
+                            viewScope.restore(this.__snapshot);
+                        return viewScope;
                     },
                     [ RSRenderer.displayName ])
                 class RSCompRenderer extends React.Component {
                     componentWillReceiveProps( props ) {
                         let Comp = this.$stores[ RSRenderer.displayName ];
                         
-                        Comp && Comp.setState({ props });
+                        //Comp && Comp.setState({ props });
                     }
                     
                     render() {
@@ -148,17 +185,28 @@ let Lib = {
         return class RSRenderer extends Store {
             static displayName = ref[ 1 ];
             static use         = use;
-            static state       = state;
+            static state       = state || {};
             static actions     = actions;
+            
+            //static actions     = actions;
+            serialize( cfg, output ) {
+                super.serialize(...arguments);
+                let snap = this.scopeObj.getSnapshotByKeyExt(output, this.$scope._id + '/' + this.name);
+                if ( snap.state && snap.state.props )
+                    delete snap.state.props;
+                delete snap.data;
+                return output;
+            }
             
             apply( d, s, c ) {
                 //if ( d ) {
-                //    this._comp.setState(c);
+                //    //this._comp.setState(c);
                 //    return d;
                 //}
                 return obj(s, {
                     $actions: this.$actions,
                     $stores : this.$stores,
+                    $scope  : this.$scope,
                     $store  : this
                 })
             }
