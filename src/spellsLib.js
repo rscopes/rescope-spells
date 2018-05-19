@@ -26,6 +26,7 @@
  */
 import React from "react";
 
+import { renderToString } from "react-dom/server"
 import is from "is";
 import {
     isSpell, spells, Store, Scope, reScope, propsToScope, scopeToProps, Component,
@@ -140,12 +141,30 @@ let Lib = {
                                 state: { [ RSRenderer.displayName ]: { props } }
                             }
                         )
-                        if ( this.__snapshot )
-                            viewScope.restore(this.__snapshot);
                         return viewScope;
                     },
                     [ RSRenderer.displayName ])
                 class RSCompRenderer extends React.Component {
+                    constructor() {
+                        super(...arguments);
+                        
+                    }
+                    
+                    componentWillMount() {
+                        super.componentWillMount(...arguments);
+                        var props     = this.props;
+                        this._ssrTest = setTimeout(
+                            tm => this.$scope.then(
+                                ( { [ RSRenderer.displayName ]: CMP } ) =>
+                                    renderToString(<RSCompRenderer { ...props }/>)
+                            ))
+                    }
+                    
+                    componentDidMount() {
+                        clearTimeout(this._ssrTest);
+                        super.componentDidMount(...arguments);
+                    }
+                    
                     componentWillReceiveProps( props ) {
                         let Comp = this.$stores[ RSRenderer.displayName ];
                         

@@ -33,6 +33,8 @@ var glob    = require("glob")
 var production    = process.argv.indexOf("--production") > -1
                     || process.argv.indexOf("-p") > -1;
 var nodeExternals = require('webpack-node-externals');
+var PeerDepsExternalsPlugin = require('peer-deps-externals-webpack-plugin');
+
 //console.warn(entries)
 module.exports    = [
     {
@@ -47,7 +49,7 @@ module.exports    = [
         },
         devtool  : 'source-map',
         target   : 'node', // in order to ignore built-in modules like path, fs, etc.
-        externals: [ nodeExternals(), 'react' ],
+        externals: [ nodeExternals(), 'react-dom/server' ],
         resolve  : {
             extensions: [
                 "",
@@ -93,6 +95,7 @@ module.exports    = [
         },
         plugins: (
             [
+                new PeerDepsExternalsPlugin(),
                 new webpack.BannerPlugin(fs.readFileSync("./LICENCE.HEAD.MD").toString()),
                 
                 new webpack.DefinePlugin({

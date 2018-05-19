@@ -318,11 +318,13 @@ module.exports =
 	
 	var _react2 = _interopRequireDefault(_react);
 	
+	var _server = __webpack_require__(6);
+	
 	var _is = __webpack_require__(3);
 	
 	var _is2 = _interopRequireDefault(_is);
 	
-	var _reactRescope = __webpack_require__(6);
+	var _reactRescope = __webpack_require__(7);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -524,7 +526,6 @@ module.exports =
 	
 	                            state: _defineProperty({}, RSRenderer.displayName, { props: props })
 	                        });
-	                        if (_this5.__snapshot) viewScope.restore(_this5.__snapshot);
 	                        return viewScope;
 	                    }, [RSRenderer.displayName]), _dec8(_class4 = function (_React$Component) {
 	                        _inherits(RSCompRenderer, _React$Component);
@@ -536,6 +537,26 @@ module.exports =
 	                        }
 	
 	                        _createClass(RSCompRenderer, [{
+	                            key: "componentWillMount",
+	                            value: function componentWillMount() {
+	                                var _this7 = this;
+	
+	                                _get(RSCompRenderer.prototype.__proto__ || Object.getPrototypeOf(RSCompRenderer.prototype), "componentWillMount", this).apply(this, arguments);
+	                                var props = this.props;
+	                                this._ssrTest = setTimeout(function (tm) {
+	                                    return _this7.$scope.then(function (_ref3) {
+	                                        var CMP = _ref3[RSRenderer.displayName];
+	                                        return (0, _server.renderToString)(_react2.default.createElement(RSCompRenderer, props));
+	                                    });
+	                                });
+	                            }
+	                        }, {
+	                            key: "componentDidMount",
+	                            value: function componentDidMount() {
+	                                clearTimeout(this._ssrTest);
+	                                _get(RSCompRenderer.prototype.__proto__ || Object.getPrototypeOf(RSCompRenderer.prototype), "componentDidMount", this).apply(this, arguments);
+	                            }
+	                        }, {
 	                            key: "componentWillReceiveProps",
 	                            value: function componentWillReceiveProps(props) {
 	                                var Comp = this.$stores[RSRenderer.displayName];
@@ -616,8 +637,8 @@ module.exports =
 	            return RSRenderer;
 	        }(_reactRescope.Store), _class5.displayName = ref[1], _class5.use = use, _class5.state = state || {}, _class5.actions = actions, _temp3;
 	    },
-	    store: function store(obj, _ref3, ref) {
-	        var cfg = _ref3[0];
+	    store: function store(obj, _ref4, ref) {
+	        var cfg = _ref4[0];
 	
 	        return _reactRescope.Store.bind(null, obj, _extends({}, cfg, { apply: function apply(d, s, c) {
 	                return obj(d, s, c);
@@ -636,6 +657,12 @@ module.exports =
 
 /***/ }),
 /* 6 */
+/***/ (function(module, exports) {
+
+	module.exports = require("react-dom/server");
+
+/***/ }),
+/* 7 */
 /***/ (function(module, exports) {
 
 	module.exports = require("react-rescope");
