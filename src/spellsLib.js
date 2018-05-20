@@ -27,11 +27,11 @@
 import React from "react";
 
 import { renderToString } from "react-dom/server"
-import is from "is";
+import is                 from "is";
 import {
     isSpell, spells, Store, Scope, reScope, propsToScope, scopeToProps, Component,
     scopeToState
-}         from "react-rescope";
+}                         from "react-rescope";
 
 @propsToScope([ 'props' ])
 @scopeToProps([ 'props' ])

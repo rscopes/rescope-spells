@@ -14,10 +14,10 @@
     "react-dom": "^16.3.2",
     "prop-types": "^15.5.10",
     "react": "^16.3.2",
-    "react-rescope": "^1.1.9"
+    "rescope": "^4.0.0-beta.0",
+    "react-rescope": "^4.0.0-beta.0"
   },
   "dependencies": {
-    "rescope": "^3.6.8"
   },
   "devDependencies": {
     "babel-cli": "^6.14.0",
