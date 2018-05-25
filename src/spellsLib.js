@@ -151,18 +151,16 @@ let Lib = {
                     }
                     
                     componentWillMount() {
-                        super.componentWillMount(...arguments);
                         var props     = this.props;
-                        this._ssrTest = setTimeout(
-                            tm => this.$scope.then(
-                                ( { [ RSRenderer.displayName ]: CMP } ) =>
-                                    renderToString(<RSCompRenderer { ...props }/>)
-                            ))
+                        //this._ssrTest = setTimeout(
+                        //    tm => this.$scope.then(
+                        //        ( { [ RSRenderer.displayName ]: CMP } ) =>
+                        //            renderToString(<RSCompRenderer { ...props }/>)
+                        //    ))
                     }
                     
                     componentDidMount() {
-                        clearTimeout(this._ssrTest);
-                        super.componentDidMount(...arguments);
+                        //clearTimeout(this._ssrTest);
                     }
                     
                     componentWillReceiveProps( props ) {
