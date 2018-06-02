@@ -101,20 +101,17 @@ let Lib = {
                 this.__snapshot = cfg.snapshot;
             }
             
-            //static actions     = actions;
             serialize( cfg, output ) {
                 super.serialize(...arguments)
                 this._compScope.serialize(...arguments)
                 return output;
             }
             
-            //static actions     = actions;
             restore() {
                 super.restore(...arguments)
                 this._compScope.restore(...arguments)
             }
             
-            //static actions     = actions;
             destroy() {
                 this._compScope.dispose("RSRenderer");
                 super.destroy();
