@@ -471,9 +471,6 @@ module.exports =
 	                _this4.__snapshot = cfg.snapshot;
 	                return _this4;
 	            }
-	
-	            //static actions     = actions;
-	
 	            //static use         = use;
 	
 	
@@ -486,9 +483,6 @@ module.exports =
 	                    (_compScope = this._compScope).serialize.apply(_compScope, arguments);
 	                    return output;
 	                }
-	
-	                //static actions     = actions;
-	
 	            }, {
 	                key: "restore",
 	                value: function restore() {
@@ -497,9 +491,6 @@ module.exports =
 	                    _get(RSRenderer.prototype.__proto__ || Object.getPrototypeOf(RSRenderer.prototype), "restore", this).apply(this, arguments);
 	                    (_compScope2 = this._compScope).restore.apply(_compScope2, arguments);
 	                }
-	
-	                //static actions     = actions;
-	
 	            }, {
 	                key: "destroy",
 	                value: function destroy() {
