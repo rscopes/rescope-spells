@@ -42,6 +42,7 @@ class RSComp extends Component {
 }
 
 let Lib = {
+	
 	@isSpell("stateMap", v => (is.object(v) || is.string(v)))
 	stateMap( obj, { 0: cfg }, ref ) {
 		let use = [], state = {}, actions = {};
