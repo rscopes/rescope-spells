@@ -44,7 +44,7 @@ rescope.isSpell = function caster( ...argz ) {
 		return ( ...argz2 ) => {
 			// are we decorating a member / with argz
 			if ( argz2[0] instanceof SimpleObjectProto && argz2[2] instanceof SimpleObjectProto && argz2[0].hasOwnProperty(argz2[1]) ) {
-				argz2[0][argz2[1]] = argz2[2].value = addCaster(argz2[0][argz2[1]], ...argz, argz2);
+				argz2[2].value = addCaster(argz2[0][argz2[1]], ...argz, argz2);
 				return argz2[0];
 			}
 			else
