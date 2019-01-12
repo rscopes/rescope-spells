@@ -397,7 +397,7 @@ module.exports =
 		return _is2.default.fn(v);
 	}), (_obj = {
 		stateMap: function stateMap(obj, _ref, ref) {
-			var _class2, _temp2;
+			var _class2, _temp2, _class3, _temp3;
 	
 			var cfg = _ref[0];
 	
@@ -407,25 +407,35 @@ module.exports =
 			    applier = obj.$apply;
 			if (applier) obj = _extends({}, obj), delete obj.$apply;
 			_reactRescope.Scope.stateMapToRefList(obj, state, use, actions);
-			return _temp2 = _class2 = function (_Store) {
-				_inherits(StateMap, _Store);
+			if (applier) return _temp2 = _class2 = function (_Store) {
+				_inherits(StateMapWA, _Store);
 	
-				function StateMap() {
+				function StateMapWA() {
 					var _ref2;
 	
 					var _temp, _this2, _ret;
 	
-					_classCallCheck(this, StateMap);
+					_classCallCheck(this, StateMapWA);
 	
 					for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
 						args[_key] = arguments[_key];
 					}
 	
-					return _ret = (_temp = (_this2 = _possibleConstructorReturn(this, (_ref2 = StateMap.__proto__ || Object.getPrototypeOf(StateMap)).call.apply(_ref2, [this].concat(args))), _this2), _this2.apply = applier, _temp), _possibleConstructorReturn(_this2, _ret);
+					return _ret = (_temp = (_this2 = _possibleConstructorReturn(this, (_ref2 = StateMapWA.__proto__ || Object.getPrototypeOf(StateMapWA)).call.apply(_ref2, [this].concat(args))), _this2), _this2.apply = applier, _temp), _possibleConstructorReturn(_this2, _ret);
+				}
+	
+				return StateMapWA;
+			}(_reactRescope.Store), _class2.displayName = ref[1], _class2.use = use, _class2.state = state, _class2.actions = actions, _temp2;else return _temp3 = _class3 = function (_Store2) {
+				_inherits(StateMap, _Store2);
+	
+				function StateMap() {
+					_classCallCheck(this, StateMap);
+	
+					return _possibleConstructorReturn(this, (StateMap.__proto__ || Object.getPrototypeOf(StateMap)).apply(this, arguments));
 				}
 	
 				return StateMap;
-			}(_reactRescope.Store), _class2.displayName = ref[1], _class2.use = use, _class2.state = state, _class2.actions = actions, _temp2;
+			}(_reactRescope.Store), _class3.displayName = ref[1], _class3.use = use, _class3.state = state, _class3.actions = actions, _temp3;
 		},
 		scope: function scope(obj, _ref3, ref) {
 			var cfg = _ref3[0];
@@ -443,7 +453,7 @@ module.exports =
 			}(_reactRescope.Scope);
 		},
 		renderer: function renderer(obj, argz, ref) {
-			var _class3, _temp3;
+			var _class4, _temp4;
 	
 			var use = void 0,
 			    state = void 0,
@@ -462,24 +472,24 @@ module.exports =
 			// actions = {});
 	
 			//!use.includes('props') && use.push('props');
-			return _temp3 = _class3 = function (_Store2) {
-				_inherits(RSRenderer, _Store2);
+			return _temp4 = _class4 = function (_Store3) {
+				_inherits(RSRenderer, _Store3);
 	
 				function RSRenderer(scope, cfg) {
 					_classCallCheck(this, RSRenderer);
 	
-					var _this4 = _possibleConstructorReturn(this, (RSRenderer.__proto__ || Object.getPrototypeOf(RSRenderer)).apply(this, arguments));
+					var _this5 = _possibleConstructorReturn(this, (RSRenderer.__proto__ || Object.getPrototypeOf(RSRenderer)).apply(this, arguments));
 	
-					_this4._compScope = new _reactRescope.Scope({}, {
+					_this5._compScope = new _reactRescope.Scope({}, {
 						key: RSRenderer.displayName,
-						parent: _this4.$scope,
+						parent: _this5.$scope,
 						autoDestroy: true
 	
 					});
 	
-					_this4._compScope.retain("RSRenderer");
-					_this4.__snapshot = cfg.snapshot;
-					return _this4;
+					_this5._compScope.retain("RSRenderer");
+					_this5.__snapshot = cfg.snapshot;
+					return _this5;
 				}
 				//static use         = use;
 	
@@ -511,8 +521,8 @@ module.exports =
 					key: "apply",
 					value: function apply(d, s, c) {
 						var _dec8,
-						    _this5 = this,
-						    _class4;
+						    _this6 = this,
+						    _class5;
 	
 						if (d) {
 							//this._comp.setState(c);
@@ -522,13 +532,13 @@ module.exports =
 						var RSCompRenderer = (_dec8 = (0, _reactRescope.scopeToState)(function (comp, props, ctx) {
 							var viewScope = new _reactRescope.Scope(_extends(_defineProperty({}, RSRenderer.displayName, Lib.rootRenderer(obj, [sm], [, RSRenderer.displayName])), scope || {}), {
 								key: "comp",
-								parent: _this5._compScope,
+								parent: _this6._compScope,
 								autoDestroy: true,
 	
 								state: _defineProperty({}, RSRenderer.displayName, { props: props })
 							});
 							return viewScope;
-						}, [RSRenderer.displayName]), _dec8(_class4 = function (_React$Component) {
+						}, [RSRenderer.displayName]), _dec8(_class5 = function (_React$Component) {
 							_inherits(RSCompRenderer, _React$Component);
 	
 							function RSCompRenderer() {
@@ -568,7 +578,7 @@ module.exports =
 							}]);
 	
 							return RSCompRenderer;
-						}(_react2.default.Component)) || _class4);
+						}(_react2.default.Component)) || _class5);
 	
 	
 						return RSCompRenderer;
@@ -576,10 +586,10 @@ module.exports =
 				}]);
 	
 				return RSRenderer;
-			}(_reactRescope.Store), _class3.displayName = ref[1], _class3.state = state, _temp3;
+			}(_reactRescope.Store), _class4.displayName = ref[1], _class4.state = state, _temp4;
 		},
 		rootRenderer: function rootRenderer(obj, argz, ref) {
-			var _class5, _temp4;
+			var _class6, _temp5;
 	
 			var use = void 0,
 			    state = void 0,
@@ -593,8 +603,8 @@ module.exports =
 			} else argz[0] && _reactRescope.Scope.stateMapToRefList(argz[0], state = {}, use = [], actions = {});
 	
 			//!use.includes('props') && use.push('props');
-			return _temp4 = _class5 = function (_Store3) {
-				_inherits(RSRenderer, _Store3);
+			return _temp5 = _class6 = function (_Store4) {
+				_inherits(RSRenderer, _Store4);
 	
 				function RSRenderer() {
 					_classCallCheck(this, RSRenderer);
@@ -633,7 +643,7 @@ module.exports =
 				}]);
 	
 				return RSRenderer;
-			}(_reactRescope.Store), _class5.displayName = ref[1], _class5.use = use, _class5.state = state || {}, _class5.actions = actions, _temp4;
+			}(_reactRescope.Store), _class6.displayName = ref[1], _class6.use = use, _class6.state = state || {}, _class6.actions = actions, _temp5;
 		},
 		store: function store(obj, _ref4, ref) {
 			var cfg = _ref4[0];

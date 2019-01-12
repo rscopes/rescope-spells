@@ -51,13 +51,21 @@ let Lib = {
 			obj = { ...obj },
 				delete obj.$apply;
 		Scope.stateMapToRefList(obj, state, use, actions)
-		return class StateMap extends Store {
-			static displayName = ref[1];
-			static use         = use;
-			static state       = state;
-			static actions     = actions;
-			apply              = applier;
-		}
+		if (applier)
+			return class StateMapWA extends Store {
+				static displayName = ref[1];
+				static use         = use;
+				static state       = state;
+				static actions     = actions;
+				apply              = applier;
+			}
+		else
+			return class StateMap extends Store {
+				static displayName = ref[1];
+				static use         = use;
+				static state       = state;
+				static actions     = actions;
+			}
 	},
 	@isSpell("scope", v => (is.object(v)))
 	scope( obj, { 0: cfg }, ref ) {
