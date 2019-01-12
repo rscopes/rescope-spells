@@ -45,13 +45,18 @@ let Lib = {
 	
 	@isSpell("stateMap", v => (is.object(v) || is.string(v)))
 	stateMap( obj, { 0: cfg }, ref ) {
-		let use = [], state = {}, actions = {};
+		let use = [], state = {}, actions = {},
+		    applier                       = obj.$apply;
+		if ( applier )
+			obj = { ...obj },
+				delete obj.$apply;
 		Scope.stateMapToRefList(obj, state, use, actions)
 		return class StateMap extends Store {
 			static displayName = ref[1];
 			static use         = use;
 			static state       = state;
 			static actions     = actions;
+			apply              = applier;
 		}
 	},
 	@isSpell("scope", v => (is.object(v)))

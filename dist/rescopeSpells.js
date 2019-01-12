@@ -190,7 +190,7 @@ module.exports =
 	
 				// are we decorating a member / with argz
 				if (argz2[0] instanceof SimpleObjectProto && argz2[2] instanceof SimpleObjectProto && argz2[0].hasOwnProperty(argz2[1])) {
-					argz2[0][argz2[1]] = argz2[2].value = addCaster.apply(undefined, [argz2[0][argz2[1]]].concat(argz, [argz2]));
+					argz2[2].value = addCaster.apply(undefined, [argz2[0][argz2[1]]].concat(argz, [argz2]));
 					return argz2[0];
 				} else return caster.apply(undefined, [argz2[0]].concat(argz));
 			};
@@ -397,28 +397,38 @@ module.exports =
 		return _is2.default.fn(v);
 	}), (_obj = {
 		stateMap: function stateMap(obj, _ref, ref) {
-			var _class2, _temp;
+			var _class2, _temp2;
 	
 			var cfg = _ref[0];
 	
 			var use = [],
 			    state = {},
-			    actions = {};
+			    actions = {},
+			    applier = obj.$apply;
+			if (applier) obj = _extends({}, obj), delete obj.$apply;
 			_reactRescope.Scope.stateMapToRefList(obj, state, use, actions);
-			return _temp = _class2 = function (_Store) {
+			return _temp2 = _class2 = function (_Store) {
 				_inherits(StateMap, _Store);
 	
 				function StateMap() {
+					var _ref2;
+	
+					var _temp, _this2, _ret;
+	
 					_classCallCheck(this, StateMap);
 	
-					return _possibleConstructorReturn(this, (StateMap.__proto__ || Object.getPrototypeOf(StateMap)).apply(this, arguments));
+					for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+						args[_key] = arguments[_key];
+					}
+	
+					return _ret = (_temp = (_this2 = _possibleConstructorReturn(this, (_ref2 = StateMap.__proto__ || Object.getPrototypeOf(StateMap)).call.apply(_ref2, [this].concat(args))), _this2), _this2.apply = applier, _temp), _possibleConstructorReturn(_this2, _ret);
 				}
 	
 				return StateMap;
-			}(_reactRescope.Store), _class2.displayName = ref[1], _class2.use = use, _class2.state = state, _class2.actions = actions, _temp;
+			}(_reactRescope.Store), _class2.displayName = ref[1], _class2.use = use, _class2.state = state, _class2.actions = actions, _temp2;
 		},
-		scope: function scope(obj, _ref2, ref) {
-			var cfg = _ref2[0];
+		scope: function scope(obj, _ref3, ref) {
+			var cfg = _ref3[0];
 	
 			return function (_Scope) {
 				_inherits(childScope, _Scope);
@@ -433,7 +443,7 @@ module.exports =
 			}(_reactRescope.Scope);
 		},
 		renderer: function renderer(obj, argz, ref) {
-			var _class3, _temp2;
+			var _class3, _temp3;
 	
 			var use = void 0,
 			    state = void 0,
@@ -452,7 +462,7 @@ module.exports =
 			// actions = {});
 	
 			//!use.includes('props') && use.push('props');
-			return _temp2 = _class3 = function (_Store2) {
+			return _temp3 = _class3 = function (_Store2) {
 				_inherits(RSRenderer, _Store2);
 	
 				function RSRenderer(scope, cfg) {
@@ -566,10 +576,10 @@ module.exports =
 				}]);
 	
 				return RSRenderer;
-			}(_reactRescope.Store), _class3.displayName = ref[1], _class3.state = state, _temp2;
+			}(_reactRescope.Store), _class3.displayName = ref[1], _class3.state = state, _temp3;
 		},
 		rootRenderer: function rootRenderer(obj, argz, ref) {
-			var _class5, _temp3;
+			var _class5, _temp4;
 	
 			var use = void 0,
 			    state = void 0,
@@ -583,7 +593,7 @@ module.exports =
 			} else argz[0] && _reactRescope.Scope.stateMapToRefList(argz[0], state = {}, use = [], actions = {});
 	
 			//!use.includes('props') && use.push('props');
-			return _temp3 = _class5 = function (_Store3) {
+			return _temp4 = _class5 = function (_Store3) {
 				_inherits(RSRenderer, _Store3);
 	
 				function RSRenderer() {
@@ -623,10 +633,10 @@ module.exports =
 				}]);
 	
 				return RSRenderer;
-			}(_reactRescope.Store), _class5.displayName = ref[1], _class5.use = use, _class5.state = state || {}, _class5.actions = actions, _temp3;
+			}(_reactRescope.Store), _class5.displayName = ref[1], _class5.use = use, _class5.state = state || {}, _class5.actions = actions, _temp4;
 		},
-		store: function store(obj, _ref3, ref) {
-			var cfg = _ref3[0];
+		store: function store(obj, _ref4, ref) {
+			var cfg = _ref4[0];
 	
 			return _reactRescope.Store.bind(null, obj, _extends({}, cfg, { apply: function apply(d, s, c) {
 					return obj(d, s, c);
