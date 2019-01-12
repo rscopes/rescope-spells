@@ -51,7 +51,7 @@ let Lib = {
 			obj = { ...obj },
 				delete obj.$apply;
 		Scope.stateMapToRefList(obj, state, use, actions)
-		if (applier)
+		if ( applier )
 			return class StateMapWA extends Store {
 				static displayName = ref[1];
 				static use         = use;
@@ -74,6 +74,11 @@ let Lib = {
 				super({ ...obj, ...map }, { ...cfg, ...cfg2 });
 			}
 		}
+	},
+	@isSpell("ref", v => (is.string(v)))
+	ref( obj, { 0: cfg } ) {
+		
+		return new Scope.scopeRef(obj);
 	},
 	
 	@isSpell("renderer", v => (is.fn(v)))
