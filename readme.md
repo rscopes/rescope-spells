@@ -14,21 +14,21 @@ Work in progress collection of chainable stores decorators for [rescope](https:/
 new Scope(
     {
 
-        @asStateMap // cast the "myData" object to a Store class named "myData"
+        @asStore // cast the "myData" object to a Store class named "myData"
         myData : {
-         @scopeRef // bind some scope refs to (myData).state.url
+         @asRef // bind some scope refs to (myData).state.url
          url    : "appConfig.myMainDataUrl",
-         @scopeRef
+         @asRef
          params : "appState"
 
         }
 
-        @asStateMap
+        @asStore
         appConfig : {
             myMainDataUrl : "http://some.where/{%appState.lang}.json
         }
 
-        @asStateMap
+        @asStore
         appState : {
             lang          : 'fr',
             currentFilter : {
@@ -45,81 +45,6 @@ new Scope(
         // cfg ...
     }
 )
-```
-
-## Objective ?
-
-Something like :
-
-```jsx
-new Scope(
-    {
-
-        @asFilteredCollection('appState.currentFilter')
-        @asItemCollection('*[type='article']')
-        @asJsonResource('url', 'params')
-        @asStateMap
-        myData : {
-         @scopeRef
-         url    : "appConfig.myMainDataUrl",
-         @scopeRef
-         params : "appState"
-        }
-        @asStateMap
-        appConfig : {
-            @asScopeTpl
-            myMainDataUrl : "http://some.where/{%appState.lang}.json
-        }
-        @asRouter
-        @asStateMap
-        appState : {
-            lang               : 'fr',
-            currentFilter : {
-                name : "Par.*"
-            }
-        }
-    }
-)
-
-```
-
-or
-
-```jsx
-@reScope(
-    {
-       @asFilteredCollection('appState.currentFilter')
-       @asItemCollection('*[type='article']')
-       @asJsonResource('url', 'params')
-       @asStateMap
-       myData : {
-        @scopeRef
-        url    : "appConfig.myMainDataUrl",
-        @scopeRef
-        params : "!appState"
-       }
-       @asStateMap
-       appConfig : {
-           @asScopeTpl
-           myMainDataUrl : "http://some.where/{%appState.lang}.json
-       }
-       @asRouter
-       @asStateMap
-       appState : {
-           lang               : 'fr',
-           currentFilter : {
-               name : "Par.*"
-           }
-       }
-    }
-    //,
-    //parentScope // default to react context inherited scope
-)
-@scopeToProps('myData')
-export default class MyComp extends Component{
-
-/*...*/
-}
 ```
 
 [![HitCount](http://hits.dwyl.io/caipilabs/Caipilabs/rescope-spells.svg)](http://hits.dwyl.io/caipilabs/Caipilabs/rescope-spells)

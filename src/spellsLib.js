@@ -43,8 +43,8 @@ class RSComp extends Component {
 
 let Lib = {
 	
-	@isSpell("stateMap", v => (is.object(v) || is.string(v)))
-	stateMap( obj, { 0: cfg }, ref ) {
+	@isSpell("store", v => (is.object(v) || is.string(v)))
+	store( obj, { 0: cfg }, ref ) {
 		let use = [], state = {}, actions = {},
 		    applier                       = obj.$apply;
 		if ( applier )
@@ -247,11 +247,6 @@ let Lib = {
 				})
 			}
 		}
-	}
-	,
-	@isSpell("store", v => (is.fn(v)))
-	store( obj, { 0: cfg }, ref ) {
-		return Store.bind(null, obj, { ...cfg, apply: ( d, s, c ) => obj(d, s, c) })
 	}
 }
 
