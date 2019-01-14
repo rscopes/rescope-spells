@@ -43,16 +43,29 @@ class RSComp extends Component {
 
 let Lib = {
 	
-	@isSpell("stateMap", v => (is.object(v) || is.string(v)))
-	stateMap( obj, { 0: cfg }, ref ) {
-		let use = [], state = {}, actions = {};
+	@isSpell("store", v => (is.object(v) || is.string(v)))
+	store( obj, { 0: cfg }, ref ) {
+		let use = [], state = {}, actions = {},
+		    applier                       = obj.$apply;
+		if ( applier )
+			obj = { ...obj },
+				delete obj.$apply;
 		Scope.stateMapToRefList(obj, state, use, actions)
-		return class StateMap extends Store {
-			static displayName = ref[1];
-			static use         = use;
-			static state       = state;
-			static actions     = actions;
-		}
+		if ( applier )
+			return class StateMapWA extends Store {
+				static displayName = ref[1];
+				static use         = use;
+				static state       = state;
+				static actions     = actions;
+				apply              = applier;
+			}
+		else
+			return class StateMap extends Store {
+				static displayName = ref[1];
+				static use         = use;
+				static state       = state;
+				static actions     = actions;
+			}
 	},
 	@isSpell("scope", v => (is.object(v)))
 	scope( obj, { 0: cfg }, ref ) {
@@ -61,6 +74,11 @@ let Lib = {
 				super({ ...obj, ...map }, { ...cfg, ...cfg2 });
 			}
 		}
+	},
+	@isSpell("ref", v => (is.string(v)))
+	ref( obj, { 0: cfg } ) {
+		
+		return new Scope.scopeRef(obj);
 	},
 	
 	@isSpell("renderer", v => (is.fn(v)))
@@ -229,11 +247,6 @@ let Lib = {
 				})
 			}
 		}
-	}
-	,
-	@isSpell("store", v => (is.fn(v)))
-	store( obj, { 0: cfg }, ref ) {
-		return Store.bind(null, obj, { ...cfg, apply: ( d, s, c ) => obj(d, s, c) })
 	}
 }
 
