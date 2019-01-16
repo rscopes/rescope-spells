@@ -1,12 +1,12 @@
 # rescope-spells
 
-[![Build Status](https://travis-ci.org/CaipiLabs/rescope-spells.svg?branch=master)](https://travis-ci.org/CaipiLabs/rescope-spells)
+[![Build Status](https://travis-ci.org/rScopes/rescope-spells.svg?branch=master)](https://travis-ci.org/rScopes/rescope-spells)
 [![NPM Version](https://badge.fury.io/js/rescope-spells.svg?style=flat)](https://npmjs.org/package/rescope-spells)
 [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](#)
 
 ## What ?
 
-Work in progress collection of chainable stores decorators for [rescope](https://github.com/CaipiLabs/ReScope)
+Work in progress collection of chainable stores decorators for [rescope](https://github.com/rScopes/ReScope)
 
 ## Examples ?
 
