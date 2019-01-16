@@ -527,15 +527,17 @@ module.exports =
 					key: "apply",
 					value: function apply(d, s, c) {
 						var _dec8,
+						    _dec9,
 						    _this6 = this,
 						    _class5;
 	
 						if (d) {
+							console.warn(d, s);
 							//this._comp.setState(c);
 							return d;
 						}
 	
-						var RSCompRenderer = (_dec8 = (0, _reactRescope.scopeToState)(function (comp, props, ctx) {
+						var RSCompRenderer = (_dec8 = (0, _reactRescope.propsToStore)(), _dec9 = (0, _reactRescope.scopeToState)(function (comp, props, ctx) {
 							var viewScope = new _reactRescope.Scope(_extends(_defineProperty({}, RSRenderer.displayName, Lib.rootRenderer(obj, [sm], [, RSRenderer.displayName])), scope || {}), {
 								key: "comp",
 								parent: _this6._compScope,
@@ -544,7 +546,7 @@ module.exports =
 								state: _defineProperty({}, RSRenderer.displayName, { props: props })
 							});
 							return viewScope;
-						}, [RSRenderer.displayName]), _dec8(_class5 = function (_React$Component) {
+						}, [RSRenderer.displayName]), _dec8(_class5 = _dec9(_class5 = function (_React$Component) {
 							_inherits(RSCompRenderer, _React$Component);
 	
 							function RSCompRenderer() {
@@ -554,29 +556,32 @@ module.exports =
 							}
 	
 							_createClass(RSCompRenderer, [{
-								key: "componentWillMount",
-								value: function componentWillMount() {
-									var props = this.props;
-									//this._ssrTest = setTimeout(
-									//    tm => this.$scope.then(
-									//        ( { [ RSRenderer.displayName ]: CMP } ) =>
-									//            renderToString(<RSCompRenderer { ...props }/>)
-									//    ))
-								}
-							}, {
-								key: "componentDidMount",
-								value: function componentDidMount() {
-									//clearTimeout(this._ssrTest);
-								}
-							}, {
-								key: "componentWillReceiveProps",
-								value: function componentWillReceiveProps(props) {
-									var Comp = this.$stores[RSRenderer.displayName];
-	
-									//Comp && Comp.setState({ props });
-								}
-							}, {
 								key: "render",
+	
+								//constructor() {
+								//	super(...arguments);
+								//
+								//}
+								//
+								//componentWillMount() {
+								//	var props = this.props;
+								//	//this._ssrTest = setTimeout(
+								//	//    tm => this.$scope.then(
+								//	//        ( { [ RSRenderer.displayName ]: CMP } ) =>
+								//	//            renderToString(<RSCompRenderer { ...props }/>)
+								//	//    ))
+								//}
+								//
+								//componentDidMount() {
+								//	//clearTimeout(this._ssrTest);
+								//}
+								//
+								//componentWillReceiveProps( props ) {
+								//	let Comp = this.$stores[RSRenderer.displayName];
+								//
+								//	//Comp && Comp.setState({ props });
+								//}
+	
 								value: function render() {
 									var Comp = this.state[RSRenderer.displayName];
 									return Comp || _react2.default.createElement("span", { className: "__rsLoad" });
@@ -584,7 +589,7 @@ module.exports =
 							}]);
 	
 							return RSCompRenderer;
-						}(_react2.default.Component)) || _class5);
+						}(_react2.default.Component)) || _class5) || _class5);
 	
 	
 						return RSCompRenderer;

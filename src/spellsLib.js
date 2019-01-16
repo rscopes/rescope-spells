@@ -29,7 +29,7 @@ import React from "react";
 import {renderToString} from "react-dom/server"
 import is               from "is";
 import {
-	isSpell, spells, Store, Scope, reScope, propsToScope, scopeToProps, Component,
+	isSpell, spells, Store, Scope, reScope, propsToScope, scopeToProps, Component, propsToStore,
 	scopeToState
 }                       from "react-rescope";
 
@@ -139,10 +139,12 @@ let Lib = {
 			
 			apply( d, s, c ) {
 				if ( d ) {
+					console.warn(d,s)
 					//this._comp.setState(c);
 					return d;
 				}
 				
+				@propsToStore()
 				@scopeToState(
 					( comp, props, ctx ) => {
 						let viewScope = new Scope(
@@ -162,29 +164,29 @@ let Lib = {
 					},
 					[RSRenderer.displayName])
 				class RSCompRenderer extends React.Component {
-					constructor() {
-						super(...arguments);
-						
-					}
-					
-					componentWillMount() {
-						var props = this.props;
-						//this._ssrTest = setTimeout(
-						//    tm => this.$scope.then(
-						//        ( { [ RSRenderer.displayName ]: CMP } ) =>
-						//            renderToString(<RSCompRenderer { ...props }/>)
-						//    ))
-					}
-					
-					componentDidMount() {
-						//clearTimeout(this._ssrTest);
-					}
-					
-					componentWillReceiveProps( props ) {
-						let Comp = this.$stores[RSRenderer.displayName];
-						
-						//Comp && Comp.setState({ props });
-					}
+					//constructor() {
+					//	super(...arguments);
+					//
+					//}
+					//
+					//componentWillMount() {
+					//	var props = this.props;
+					//	//this._ssrTest = setTimeout(
+					//	//    tm => this.$scope.then(
+					//	//        ( { [ RSRenderer.displayName ]: CMP } ) =>
+					//	//            renderToString(<RSCompRenderer { ...props }/>)
+					//	//    ))
+					//}
+					//
+					//componentDidMount() {
+					//	//clearTimeout(this._ssrTest);
+					//}
+					//
+					//componentWillReceiveProps( props ) {
+					//	let Comp = this.$stores[RSRenderer.displayName];
+					//
+					//	//Comp && Comp.setState({ props });
+					//}
 					
 					render() {
 						let Comp = this.state[RSRenderer.displayName];
