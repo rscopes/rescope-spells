@@ -280,38 +280,36 @@ module.exports =
 		value: true
 	});
 	
-	var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
-	
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	var _dec, _dec2, _class, _dec3, _dec4, _dec5, _dec6, _dec7, _desc, _value, _obj; /*
-	                                                                                  * Copyright (c)  2018 Wise Wild Web .
-	                                                                                  *
-	                                                                                  *  MIT License
-	                                                                                  *
-	                                                                                  *  Permission is hereby granted, free of charge, to any person obtaining a copy
-	                                                                                  *  of this software and associated documentation files (the "Software"), to deal
-	                                                                                  *  in the Software without restriction, including without limitation the rights
-	                                                                                  *  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-	                                                                                  *  copies of the Software, and to permit persons to whom the Software is
-	                                                                                  *  furnished to do so, subject to the following conditions:
-	                                                                                  *
-	                                                                                  *  The above copyright notice and this permission notice shall be included in all
-	                                                                                  *  copies or substantial portions of the Software.
-	                                                                                  *
-	                                                                                  *  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-	                                                                                  *  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-	                                                                                  *  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-	                                                                                  *  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-	                                                                                  *  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-	                                                                                  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-	                                                                                  *  SOFTWARE.
-	                                                                                  *
-	                                                                                  * @author : Nathanael Braun
-	                                                                                  * @contact : caipilabs@gmail.com
-	                                                                                  */
+	var _dec, _dec2, _class, _dec3, _dec4, _dec5, _desc, _value, _obj; /*
+	                                                                    * Copyright (c)  2018 Wise Wild Web .
+	                                                                    *
+	                                                                    *  MIT License
+	                                                                    *
+	                                                                    *  Permission is hereby granted, free of charge, to any person obtaining a copy
+	                                                                    *  of this software and associated documentation files (the "Software"), to deal
+	                                                                    *  in the Software without restriction, including without limitation the rights
+	                                                                    *  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+	                                                                    *  copies of the Software, and to permit persons to whom the Software is
+	                                                                    *  furnished to do so, subject to the following conditions:
+	                                                                    *
+	                                                                    *  The above copyright notice and this permission notice shall be included in all
+	                                                                    *  copies or substantial portions of the Software.
+	                                                                    *
+	                                                                    *  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+	                                                                    *  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+	                                                                    *  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+	                                                                    *  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+	                                                                    *  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+	                                                                    *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+	                                                                    *  SOFTWARE.
+	                                                                    *
+	                                                                    * @author : Nathanael Braun
+	                                                                    * @contact : caipilabs@gmail.com
+	                                                                    */
 	
 	
 	var _react = __webpack_require__(5);
@@ -327,8 +325,6 @@ module.exports =
 	var _reactRescope = __webpack_require__(7);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 	
 	function _applyDecoratedDescriptor(target, property, decorators, descriptor, context) {
 		var desc = {};
@@ -391,10 +387,6 @@ module.exports =
 		return _is2.default.object(v);
 	}), _dec5 = (0, _reactRescope.isSpell)("ref", function (v) {
 		return _is2.default.string(v);
-	}), _dec6 = (0, _reactRescope.isSpell)("renderer", function (v) {
-		return _is2.default.fn(v);
-	}), _dec7 = (0, _reactRescope.isSpell)("rootRenderer", function (v) {
-		return _is2.default.fn(v);
 	}), (_obj = {
 		store: function store(obj, _ref, ref) {
 			var _class2, _temp2, _class3, _temp3;
@@ -457,206 +449,8 @@ module.exports =
 	
 	
 			return new _reactRescope.Scope.scopeRef(obj);
-		},
-		renderer: function renderer(obj, argz, ref) {
-			var _class4, _temp4;
-	
-			var use = void 0,
-			    state = void 0,
-			    scope = argz[1] && argz[0],
-			    sm = argz[1] || argz[0];
-			//if ( !argz[ 0 ] ) {
-			state = {};
-			//argz[ 0 ] = []
-			//}
-			//else if ( is.array(argz[ 0 ]) ) {
-			//    use   = argz[ 0 ];
-			//    state = !use.length && {};
-			//}
-			//else
-			//    argz[ 0 ] && Scope.stateMapToRefList(argz[ 0 ], state = {}, use = [],
-			// actions = {});
-	
-			//!use.includes('props') && use.push('props');
-			return _temp4 = _class4 = function (_Store3) {
-				_inherits(RSRenderer, _Store3);
-	
-				function RSRenderer(scope, cfg) {
-					_classCallCheck(this, RSRenderer);
-	
-					var _this5 = _possibleConstructorReturn(this, (RSRenderer.__proto__ || Object.getPrototypeOf(RSRenderer)).apply(this, arguments));
-	
-					_this5._compScope = new _reactRescope.Scope({}, {
-						key: RSRenderer.displayName,
-						parent: _this5.$scope,
-						autoDestroy: true
-	
-					});
-	
-					_this5._compScope.retain("RSRenderer");
-					_this5.__snapshot = cfg.snapshot;
-					return _this5;
-				}
-				//static use         = use;
-	
-	
-				_createClass(RSRenderer, [{
-					key: "serialize",
-					value: function serialize(cfg, output) {
-						var _compScope;
-	
-						_get(RSRenderer.prototype.__proto__ || Object.getPrototypeOf(RSRenderer.prototype), "serialize", this).apply(this, arguments);
-						(_compScope = this._compScope).serialize.apply(_compScope, arguments);
-						return output;
-					}
-				}, {
-					key: "restore",
-					value: function restore() {
-						var _compScope2;
-	
-						_get(RSRenderer.prototype.__proto__ || Object.getPrototypeOf(RSRenderer.prototype), "restore", this).apply(this, arguments);
-						(_compScope2 = this._compScope).restore.apply(_compScope2, arguments);
-					}
-				}, {
-					key: "destroy",
-					value: function destroy() {
-						this._compScope.dispose("RSRenderer");
-						_get(RSRenderer.prototype.__proto__ || Object.getPrototypeOf(RSRenderer.prototype), "destroy", this).call(this);
-					}
-				}, {
-					key: "apply",
-					value: function apply(d, s, c) {
-						var _dec8,
-						    _dec9,
-						    _this6 = this,
-						    _class5;
-	
-						if (d) {
-							console.warn(d, s);
-							//this._comp.setState(c);
-							return d;
-						}
-	
-						var RSCompRenderer = (_dec8 = (0, _reactRescope.propsToStore)(), _dec9 = (0, _reactRescope.scopeToState)(function (comp, props, ctx) {
-							var viewScope = new _reactRescope.Scope(_extends(_defineProperty({}, RSRenderer.displayName, Lib.rootRenderer(obj, [sm], [, RSRenderer.displayName])), scope || {}), {
-								key: "comp",
-								parent: _this6._compScope,
-								autoDestroy: true,
-	
-								state: _defineProperty({}, RSRenderer.displayName, { props: props })
-							});
-							return viewScope;
-						}, [RSRenderer.displayName]), _dec8(_class5 = _dec9(_class5 = function (_React$Component) {
-							_inherits(RSCompRenderer, _React$Component);
-	
-							function RSCompRenderer() {
-								_classCallCheck(this, RSCompRenderer);
-	
-								return _possibleConstructorReturn(this, (RSCompRenderer.__proto__ || Object.getPrototypeOf(RSCompRenderer)).apply(this, arguments));
-							}
-	
-							_createClass(RSCompRenderer, [{
-								key: "render",
-	
-								//constructor() {
-								//	super(...arguments);
-								//
-								//}
-								//
-								//componentWillMount() {
-								//	var props = this.props;
-								//	//this._ssrTest = setTimeout(
-								//	//    tm => this.$scope.then(
-								//	//        ( { [ RSRenderer.displayName ]: CMP } ) =>
-								//	//            renderToString(<RSCompRenderer { ...props }/>)
-								//	//    ))
-								//}
-								//
-								//componentDidMount() {
-								//	//clearTimeout(this._ssrTest);
-								//}
-								//
-								//componentWillReceiveProps( props ) {
-								//	let Comp = this.$stores[RSRenderer.displayName];
-								//
-								//	//Comp && Comp.setState({ props });
-								//}
-	
-								value: function render() {
-									var Comp = this.state[RSRenderer.displayName];
-									return Comp || _react2.default.createElement("span", { className: "__rsLoad" });
-								}
-							}]);
-	
-							return RSCompRenderer;
-						}(_react2.default.Component)) || _class5) || _class5);
-	
-	
-						return RSCompRenderer;
-					}
-				}]);
-	
-				return RSRenderer;
-			}(_reactRescope.Store), _class4.displayName = ref[1], _class4.state = state, _temp4;
-		},
-		rootRenderer: function rootRenderer(obj, argz, ref) {
-			var _class6, _temp5;
-	
-			var use = void 0,
-			    state = void 0,
-			    actions = void 0;
-			if (!argz[0]) {
-				state = {};
-				//argz[ 0 ] = []
-			} else if (_is2.default.array(argz[0])) {
-				use = argz[0];
-				state = !use.length && {};
-			} else argz[0] && _reactRescope.Scope.stateMapToRefList(argz[0], state = {}, use = [], actions = {});
-	
-			//!use.includes('props') && use.push('props');
-			return _temp5 = _class6 = function (_Store4) {
-				_inherits(RSRenderer, _Store4);
-	
-				function RSRenderer() {
-					_classCallCheck(this, RSRenderer);
-	
-					return _possibleConstructorReturn(this, (RSRenderer.__proto__ || Object.getPrototypeOf(RSRenderer)).apply(this, arguments));
-				}
-	
-				_createClass(RSRenderer, [{
-					key: "serialize_ex",
-	
-	
-					//static actions     = actions;
-					value: function serialize_ex(cfg, output, sid, alias, exclude) {
-						output = _get(RSRenderer.prototype.__proto__ || Object.getPrototypeOf(RSRenderer.prototype), "serialize_ex", this).call(this, cfg, output, sid, alias, exclude);
-						var snap = this.scopeObj.getSnapshotByKeyExt(output, sid + '>' + this.name);
-						if (snap) {
-							snap.state && snap.state.props && delete snap.state.props;
-							delete snap.data;
-						}
-						return output;
-					}
-				}, {
-					key: "apply",
-					value: function apply(d, s, c) {
-						//if ( d ) {
-						//    //this._comp.setState(c);
-						//    return d;
-						//}
-						return obj(s, {
-							$actions: this.$actions,
-							$stores: this.$stores,
-							$scope: this.$scope,
-							$store: this
-						});
-					}
-				}]);
-	
-				return RSRenderer;
-			}(_reactRescope.Store), _class6.displayName = ref[1], _class6.use = use, _class6.state = state || {}, _class6.actions = actions, _temp5;
 		}
-	}, (_applyDecoratedDescriptor(_obj, "store", [_dec3], Object.getOwnPropertyDescriptor(_obj, "store"), _obj), _applyDecoratedDescriptor(_obj, "scope", [_dec4], Object.getOwnPropertyDescriptor(_obj, "scope"), _obj), _applyDecoratedDescriptor(_obj, "ref", [_dec5], Object.getOwnPropertyDescriptor(_obj, "ref"), _obj), _applyDecoratedDescriptor(_obj, "renderer", [_dec6], Object.getOwnPropertyDescriptor(_obj, "renderer"), _obj), _applyDecoratedDescriptor(_obj, "rootRenderer", [_dec7], Object.getOwnPropertyDescriptor(_obj, "rootRenderer"), _obj)), _obj));
+	}, (_applyDecoratedDescriptor(_obj, "store", [_dec3], Object.getOwnPropertyDescriptor(_obj, "store"), _obj), _applyDecoratedDescriptor(_obj, "scope", [_dec4], Object.getOwnPropertyDescriptor(_obj, "scope"), _obj), _applyDecoratedDescriptor(_obj, "ref", [_dec5], Object.getOwnPropertyDescriptor(_obj, "ref"), _obj)), _obj));
 	
 	exports.default = Lib;
 	module.exports = exports["default"];
