@@ -75,9 +75,35 @@ let Lib = {
 		}
 	},
 	@isSpell("ref", v => (is.string(v)))
-	ref( obj, { 0: cfg } ) {
+	ref( obj, { 0: cfg }, ref ) {
 		
 		return new Scope.scopeRef(obj);
+	},
+	@isSpell("stateMap", v => (v === Store || v.prototype instanceof Store), 'with')
+	stateMap( obj, { 0: stateMap } ) {
+		let use = [], initialState = {}, actions = {}, applier = stateMap.$apply;
+		if ( stateMap.$apply )
+			stateMap = { ...stateMap },
+				delete stateMap.$apply;
+		stateMap && Scope.stateMapToRefList(stateMap, initialState, use, actions);
+		if ( applier )
+			return class withStateMap extends obj {
+				static displayName = obj.displayName || obj.name;
+				static actions     = obj.actions && { ...obj.actions, ...actions } || actions;
+				static state       = obj.state && { ...obj.state, ...initialState } || initialState;
+				static use         = obj.use && [...obj.use, ...use] || use;
+				
+				apply() {
+					return applier.apply(this, arguments);
+				}
+			}
+		else
+			return class withStateMap extends obj {
+				static displayName = obj.displayName || obj.name;
+				static actions     = obj.actions && { ...obj.actions, ...actions } || actions;
+				static state       = obj.state && { ...obj.state, ...initialState } || initialState;
+				static use         = obj.use && [...obj.use, ...use] || use;
+			}
 	},
 }
 

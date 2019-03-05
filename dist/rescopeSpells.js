@@ -284,32 +284,32 @@ module.exports =
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	var _dec, _dec2, _class, _dec3, _dec4, _dec5, _desc, _value, _obj; /*
-	                                                                    * Copyright (c)  2018 Wise Wild Web .
-	                                                                    *
-	                                                                    *  MIT License
-	                                                                    *
-	                                                                    *  Permission is hereby granted, free of charge, to any person obtaining a copy
-	                                                                    *  of this software and associated documentation files (the "Software"), to deal
-	                                                                    *  in the Software without restriction, including without limitation the rights
-	                                                                    *  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-	                                                                    *  copies of the Software, and to permit persons to whom the Software is
-	                                                                    *  furnished to do so, subject to the following conditions:
-	                                                                    *
-	                                                                    *  The above copyright notice and this permission notice shall be included in all
-	                                                                    *  copies or substantial portions of the Software.
-	                                                                    *
-	                                                                    *  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-	                                                                    *  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-	                                                                    *  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-	                                                                    *  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-	                                                                    *  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-	                                                                    *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-	                                                                    *  SOFTWARE.
-	                                                                    *
-	                                                                    * @author : Nathanael Braun
-	                                                                    * @contact : caipilabs@gmail.com
-	                                                                    */
+	var _dec, _dec2, _class, _dec3, _dec4, _dec5, _dec6, _desc, _value, _obj; /*
+	                                                                           * Copyright (c)  2018 Wise Wild Web .
+	                                                                           *
+	                                                                           *  MIT License
+	                                                                           *
+	                                                                           *  Permission is hereby granted, free of charge, to any person obtaining a copy
+	                                                                           *  of this software and associated documentation files (the "Software"), to deal
+	                                                                           *  in the Software without restriction, including without limitation the rights
+	                                                                           *  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+	                                                                           *  copies of the Software, and to permit persons to whom the Software is
+	                                                                           *  furnished to do so, subject to the following conditions:
+	                                                                           *
+	                                                                           *  The above copyright notice and this permission notice shall be included in all
+	                                                                           *  copies or substantial portions of the Software.
+	                                                                           *
+	                                                                           *  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+	                                                                           *  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+	                                                                           *  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+	                                                                           *  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+	                                                                           *  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+	                                                                           *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+	                                                                           *  SOFTWARE.
+	                                                                           *
+	                                                                           * @author : Nathanael Braun
+	                                                                           * @contact : caipilabs@gmail.com
+	                                                                           */
 	
 	
 	var _react = __webpack_require__(5);
@@ -325,6 +325,8 @@ module.exports =
 	var _reactRescope = __webpack_require__(7);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 	
 	function _applyDecoratedDescriptor(target, property, decorators, descriptor, context) {
 		var desc = {};
@@ -387,7 +389,9 @@ module.exports =
 		return _is2.default.object(v);
 	}), _dec5 = (0, _reactRescope.isSpell)("ref", function (v) {
 		return _is2.default.string(v);
-	}), (_obj = {
+	}), _dec6 = (0, _reactRescope.isSpell)("stateMap", function (v) {
+		return v === _reactRescope.Store || v.prototype instanceof _reactRescope.Store;
+	}, 'with'), (_obj = {
 		store: function store(obj, _ref, ref) {
 			var _class2, _temp2, _class3, _temp3;
 	
@@ -444,13 +448,53 @@ module.exports =
 				return childScope;
 			}(_reactRescope.Scope);
 		},
-		ref: function ref(obj, _ref4) {
-			var cfg = _ref4[0];
+		ref: function ref(obj, _ref5, _ref4) {
+			var cfg = _ref5[0];
 	
 	
 			return new _reactRescope.Scope.scopeRef(obj);
+		},
+		stateMap: function stateMap(obj, _ref6) {
+			var _class4, _temp4, _class5, _temp5;
+	
+			var _stateMap = _ref6[0];
+	
+			var use = [],
+			    initialState = {},
+			    actions = {},
+			    applier = _stateMap.$apply;
+			if (_stateMap.$apply) _stateMap = _extends({}, _stateMap), delete _stateMap.$apply;
+			_stateMap && _reactRescope.Scope.stateMapToRefList(_stateMap, initialState, use, actions);
+			if (applier) return _temp4 = _class4 = function (_obj2) {
+				_inherits(withStateMap, _obj2);
+	
+				function withStateMap() {
+					_classCallCheck(this, withStateMap);
+	
+					return _possibleConstructorReturn(this, (withStateMap.__proto__ || Object.getPrototypeOf(withStateMap)).apply(this, arguments));
+				}
+	
+				_createClass(withStateMap, [{
+					key: "apply",
+					value: function apply() {
+						return applier.apply(this, arguments);
+					}
+				}]);
+	
+				return withStateMap;
+			}(obj), _class4.displayName = obj.displayName || obj.name, _class4.actions = obj.actions && _extends({}, obj.actions, actions) || actions, _class4.state = obj.state && _extends({}, obj.state, initialState) || initialState, _class4.use = obj.use && [].concat(_toConsumableArray(obj.use), use) || use, _temp4;else return _temp5 = _class5 = function (_obj3) {
+				_inherits(withStateMap, _obj3);
+	
+				function withStateMap() {
+					_classCallCheck(this, withStateMap);
+	
+					return _possibleConstructorReturn(this, (withStateMap.__proto__ || Object.getPrototypeOf(withStateMap)).apply(this, arguments));
+				}
+	
+				return withStateMap;
+			}(obj), _class5.displayName = obj.displayName || obj.name, _class5.actions = obj.actions && _extends({}, obj.actions, actions) || actions, _class5.state = obj.state && _extends({}, obj.state, initialState) || initialState, _class5.use = obj.use && [].concat(_toConsumableArray(obj.use), use) || use, _temp5;
 		}
-	}, (_applyDecoratedDescriptor(_obj, "store", [_dec3], Object.getOwnPropertyDescriptor(_obj, "store"), _obj), _applyDecoratedDescriptor(_obj, "scope", [_dec4], Object.getOwnPropertyDescriptor(_obj, "scope"), _obj), _applyDecoratedDescriptor(_obj, "ref", [_dec5], Object.getOwnPropertyDescriptor(_obj, "ref"), _obj)), _obj));
+	}, (_applyDecoratedDescriptor(_obj, "store", [_dec3], Object.getOwnPropertyDescriptor(_obj, "store"), _obj), _applyDecoratedDescriptor(_obj, "scope", [_dec4], Object.getOwnPropertyDescriptor(_obj, "scope"), _obj), _applyDecoratedDescriptor(_obj, "ref", [_dec5], Object.getOwnPropertyDescriptor(_obj, "ref"), _obj), _applyDecoratedDescriptor(_obj, "stateMap", [_dec6], Object.getOwnPropertyDescriptor(_obj, "stateMap"), _obj)), _obj));
 	
 	exports.default = Lib;
 	module.exports = exports["default"];
