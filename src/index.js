@@ -28,4 +28,8 @@ import rescope from "rescope";
 import "./spellFactory";
 import "./spellsLib";
 
+export const asStore    = rescope.spells.asStore;
+export const asScope    = rescope.spells.asScope;
+export const asRef      = rescope.spells.asRef;
+export const asStateMap = rescope.spells.asStateMap;
 export default rescope.spells;

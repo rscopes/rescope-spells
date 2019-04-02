@@ -28,8 +28,9 @@ import React from "react";
 
 import {renderToString} from "react-dom/server"
 import is               from "is";
+import {isSpell}        from "./spellFactory";
 import {
-	isSpell, spells, Store, Scope, reScope, propsToScope, scopeToProps, Component, propsToStore,
+	spells, Store, Scope, reScope, propsToScope, scopeToProps, Component, propsToStore,
 	scopeToState
 }                       from "react-rescope";
 
