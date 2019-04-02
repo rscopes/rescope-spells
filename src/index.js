@@ -24,12 +24,12 @@
  * @author : Nathanael Braun
  * @contact : caipilabs@gmail.com
  */
-import rescope from "rescope";
-import "./spellFactory";
+import {isSpell as _isSpell, spells} from "./spellFactory";
 import "./spellsLib";
 
-export const asStore    = rescope.spells.asStore;
-export const asScope    = rescope.spells.asScope;
-export const asRef      = rescope.spells.asRef;
-export const asStateMap = rescope.spells.asStateMap;
-export default rescope.spells;
+export const isSpell    = _isSpell;
+export const asStore    = spells.asStore;
+export const asScope    = spells.asScope;
+export const asRef      = spells.asRef;
+export const asStateMap = spells.asStateMap;
+export default { ...spells, isSpell: _isSpell };
