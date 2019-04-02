@@ -28,8 +28,9 @@ import React from "react";
 
 import {renderToString} from "react-dom/server"
 import is               from "is";
+import {isSpell}        from "./spellFactory";
 import {
-	isSpell, spells, Store, Scope, reScope, propsToScope, scopeToProps, Component,
+	spells, Store, Scope, reScope, propsToScope, scopeToProps, Component, propsToStore,
 	scopeToState
 }                       from "react-rescope";
 
@@ -42,7 +43,6 @@ class RSComp extends Component {
 }
 
 let Lib = {
-	
 	@isSpell("store", v => (is.object(v) || is.string(v)))
 	store( obj, { 0: cfg }, ref ) {
 		let use = [], state = {}, actions = {},
@@ -76,178 +76,36 @@ let Lib = {
 		}
 	},
 	@isSpell("ref", v => (is.string(v)))
-	ref( obj, { 0: cfg } ) {
+	ref( obj, { 0: cfg }, ref ) {
 		
 		return new Scope.scopeRef(obj);
 	},
-	
-	@isSpell("renderer", v => (is.fn(v)))
-	renderer( obj, argz, ref ) {
-		let use,
-		    state,
-		    scope = argz[1] && argz[0],
-		    sm    = argz[1] || argz[0];
-		//if ( !argz[ 0 ] ) {
-		state     = {};
-		//argz[ 0 ] = []
-		//}
-		//else if ( is.array(argz[ 0 ]) ) {
-		//    use   = argz[ 0 ];
-		//    state = !use.length && {};
-		//}
-		//else
-		//    argz[ 0 ] && Scope.stateMapToRefList(argz[ 0 ], state = {}, use = [],
-		// actions = {});
-		
-		//!use.includes('props') && use.push('props');
-		return class RSRenderer extends Store {
-			static displayName = ref[1];
-			//static use         = use;
-			static state       = state;
-			
-			constructor( scope, cfg ) {
-				super(...arguments);
-				this._compScope = new Scope(
-					{},
-					{
-						key        : RSRenderer.displayName,
-						parent     : this.$scope,
-						autoDestroy: true,
-						
-					}
-				)
+	@isSpell("stateMap", v => (v === Store || v.prototype instanceof Store), 'with')
+	stateMap( obj, { 0: stateMap } ) {
+		let use = [], initialState = {}, actions = {}, applier = stateMap.$apply;
+		if ( stateMap.$apply )
+			stateMap = { ...stateMap },
+				delete stateMap.$apply;
+		stateMap && Scope.stateMapToRefList(stateMap, initialState, use, actions);
+		if ( applier )
+			return class withStateMap extends obj {
+				static displayName = obj.displayName || obj.name;
+				static actions     = obj.actions && { ...obj.actions, ...actions } || actions;
+				static state       = obj.state && { ...obj.state, ...initialState } || initialState;
+				static use         = obj.use && [...obj.use, ...use] || use;
 				
-				this._compScope.retain("RSRenderer");
-				this.__snapshot = cfg.snapshot;
-			}
-			
-			serialize( cfg, output ) {
-				super.serialize(...arguments)
-				this._compScope.serialize(...arguments)
-				return output;
-			}
-			
-			restore() {
-				super.restore(...arguments)
-				this._compScope.restore(...arguments)
-			}
-			
-			destroy() {
-				this._compScope.dispose("RSRenderer");
-				super.destroy();
-			}
-			
-			apply( d, s, c ) {
-				if ( d ) {
-					//this._comp.setState(c);
-					return d;
+				apply() {
+					return applier.apply(this, arguments);
 				}
-				
-				@scopeToState(
-					( comp, props, ctx ) => {
-						let viewScope = new Scope(
-							{
-								[RSRenderer.displayName]: Lib.rootRenderer(obj, [sm], [, RSRenderer.displayName]),
-								...(scope || {})
-							},
-							{
-								key        : "comp",
-								parent     : this._compScope,
-								autoDestroy: true,
-								
-								state: { [RSRenderer.displayName]: { props } }
-							}
-						)
-						return viewScope;
-					},
-					[RSRenderer.displayName])
-				class RSCompRenderer extends React.Component {
-					constructor() {
-						super(...arguments);
-						
-					}
-					
-					componentWillMount() {
-						var props = this.props;
-						//this._ssrTest = setTimeout(
-						//    tm => this.$scope.then(
-						//        ( { [ RSRenderer.displayName ]: CMP } ) =>
-						//            renderToString(<RSCompRenderer { ...props }/>)
-						//    ))
-					}
-					
-					componentDidMount() {
-						//clearTimeout(this._ssrTest);
-					}
-					
-					componentWillReceiveProps( props ) {
-						let Comp = this.$stores[RSRenderer.displayName];
-						
-						//Comp && Comp.setState({ props });
-					}
-					
-					render() {
-						let Comp = this.state[RSRenderer.displayName];
-						return Comp ||
-							<span className={ "__rsLoad" }/>
-					}
-				}
-				
-				return RSCompRenderer;
 			}
-		}
-	},
-	
-	@isSpell("rootRenderer", v => (is.fn(v)))
-	rootRenderer( obj, argz, ref ) {
-		
-		let use,
-		    state,
-		    actions;
-		if ( !argz[0] ) {
-			state = {};
-			//argz[ 0 ] = []
-		}
-		else if ( is.array(argz[0]) ) {
-			use   = argz[0];
-			state = !use.length && {};
-		}
 		else
-			argz[0] && Scope.stateMapToRefList(argz[0], state = {}, use = [], actions = {});
-		
-		//!use.includes('props') && use.push('props');
-		return class RSRenderer extends Store {
-			static displayName = ref[1];
-			static use         = use;
-			static state       = state || {};
-			static actions     = actions;
-			
-			//static actions     = actions;
-			serialize_ex( cfg, output, sid, alias, exclude ) {
-				output   = super.serialize_ex(cfg, output, sid, alias, exclude);
-				let snap = this.scopeObj.getSnapshotByKeyExt(output, sid + '>' + this.name);
-				if ( snap ) {
-					snap.state && snap.state.props &&
-					delete snap.state.props;
-					delete snap.data;
-				}
-				return output;
+			return class withStateMap extends obj {
+				static displayName = obj.displayName || obj.name;
+				static actions     = obj.actions && { ...obj.actions, ...actions } || actions;
+				static state       = obj.state && { ...obj.state, ...initialState } || initialState;
+				static use         = obj.use && [...obj.use, ...use] || use;
 			}
-			
-			apply( d, s, c ) {
-				//if ( d ) {
-				//    //this._comp.setState(c);
-				//    return d;
-				//}
-				return obj(s, {
-					$actions: this.$actions,
-					$stores : this.$stores,
-					$scope  : this.$scope,
-					$store  : this
-				})
-			}
-		}
-	}
+	},
 }
 
 export default Lib;

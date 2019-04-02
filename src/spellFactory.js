@@ -29,7 +29,9 @@ import is      from "is";
 // will use as external the index in dist
 
 const SimpleObjectProto = ({}).constructor;
-rescope.spells          = {};
+
+
+export const spells = {};
 
 let castTypesToAppliable = {};
 let castTypes            = {};
@@ -44,7 +46,7 @@ rescope.isSpell = function caster( ...argz ) {
 		return ( ...argz2 ) => {
 			// are we decorating a member / with argz
 			if ( argz2[0] instanceof SimpleObjectProto && argz2[2] instanceof SimpleObjectProto && argz2[0].hasOwnProperty(argz2[1]) ) {
-				argz2[2].value = addCaster(argz2[0][argz2[1]], ...argz, argz2);
+				argz2[0][argz2[1]] = argz2[2].value = addCaster(argz2[0][argz2[1]], ...argz, argz2);
 				return argz2[0];
 			}
 			else
@@ -52,7 +54,9 @@ rescope.isSpell = function caster( ...argz ) {
 		}
 	}
 	return addCaster(...argz);
-}
+};
+
+export const isSpell = rescope.isSpell;
 
 function addCaster( ...argz ) {
 	let cast = (!argz[0] || is.fn(argz[0])) && argz.shift();
@@ -68,7 +72,7 @@ function addCaster( ...argz ) {
 	if ( !castTypesToAppliable[typeName] ) {
 		castTypesToAppliable[typeName] = [];
 		
-		rescope.spells[casterName] = castTypes[typeName] =
+		spells[casterName] = castTypes[typeName] =
 			function doCast( ...argz ) {
 				// are we decorating a member / without argz
 				if ( argz[0] instanceof SimpleObjectProto && argz[2] instanceof SimpleObjectProto && argz[0].hasOwnProperty(argz[1]) ) {
@@ -94,7 +98,7 @@ function addCaster( ...argz ) {
 			typeName, test, memberDescr, cast
 		}
 	)
-	return castTypes[typeName];
+	return spells[casterName];
 }
 
 function isCastableType( typeName, Comp, member, stateScope ) {
