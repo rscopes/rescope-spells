@@ -34676,7 +34676,7 @@ module.exports = function(originalModule) {
 /*!**********************!*\
   !*** ./src/index.js ***!
   \**********************/
-/*! exports provided: isSpell, asStore, asScope, asRef, asStateMap, default */
+/*! exports provided: isSpell, asStore, asScope, asRef, withStateMap, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -34685,15 +34685,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "asStore", function() { return asStore; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "asScope", function() { return asScope; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "asRef", function() { return asRef; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "asStateMap", function() { return asStateMap; });
-/* harmony import */ var _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/objectSpread */ "./node_modules/@babel/runtime/helpers/objectSpread.js");
-/* harmony import */ var _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var rescope__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! rescope */ "./node_modules/rescope/etc/npm/index.js");
-/* harmony import */ var rescope__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(rescope__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _spellFactory__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./spellFactory */ "./src/spellFactory.js");
-/* harmony import */ var _spellsLib__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./spellsLib */ "./src/spellsLib.js");
-
-
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "withStateMap", function() { return withStateMap; });
+/* harmony import */ var _spellFactory__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./spellFactory */ "./src/spellFactory.js");
+/* harmony import */ var _spellsLib__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./spellsLib */ "./src/spellsLib.js");
 (function () {
   var enterModule = (typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoaderGlobal : __webpack_require__(/*! react-hot-loader */ "./node_modules/react-hot-loader/index.js")).enterModule;
   enterModule && enterModule(module);
@@ -34727,17 +34721,12 @@ __webpack_require__.r(__webpack_exports__);
  */
 
 
-
-var isSpell = _spellFactory__WEBPACK_IMPORTED_MODULE_2__["isSpell"];
-var asStore = _spellFactory__WEBPACK_IMPORTED_MODULE_2__["spells"].asStore;
-var asScope = _spellFactory__WEBPACK_IMPORTED_MODULE_2__["spells"].asScope;
-var asRef = _spellFactory__WEBPACK_IMPORTED_MODULE_2__["spells"].asRef;
-var asStateMap = _spellFactory__WEBPACK_IMPORTED_MODULE_2__["spells"].asStateMap;
-
-var _default = _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_0___default()({}, _spellFactory__WEBPACK_IMPORTED_MODULE_2__["spells"], {
-  isSpell: _spellFactory__WEBPACK_IMPORTED_MODULE_2__["isSpell"]
-});
-
+var isSpell = _spellFactory__WEBPACK_IMPORTED_MODULE_0__["isSpell"];
+var asStore = _spellFactory__WEBPACK_IMPORTED_MODULE_0__["spells"].asStore;
+var asScope = _spellFactory__WEBPACK_IMPORTED_MODULE_0__["spells"].asScope;
+var asRef = _spellFactory__WEBPACK_IMPORTED_MODULE_0__["spells"].asRef;
+var withStateMap = _spellFactory__WEBPACK_IMPORTED_MODULE_0__["spells"].withStateMap;
+var _default = _spellFactory__WEBPACK_IMPORTED_MODULE_0__["spells"];
 /* harmony default export */ __webpack_exports__["default"] = (_default);
 ;
 
@@ -34752,7 +34741,7 @@ var _default = _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_0___
   reactHotLoader.register(asStore, "asStore", "G:\\n8tz\\libs\\rScopes\\rescope-spells\\src\\index.js");
   reactHotLoader.register(asScope, "asScope", "G:\\n8tz\\libs\\rScopes\\rescope-spells\\src\\index.js");
   reactHotLoader.register(asRef, "asRef", "G:\\n8tz\\libs\\rScopes\\rescope-spells\\src\\index.js");
-  reactHotLoader.register(asStateMap, "asStateMap", "G:\\n8tz\\libs\\rScopes\\rescope-spells\\src\\index.js");
+  reactHotLoader.register(withStateMap, "withStateMap", "G:\\n8tz\\libs\\rScopes\\rescope-spells\\src\\index.js");
   reactHotLoader.register(_default, "default", "G:\\n8tz\\libs\\rScopes\\rescope-spells\\src\\index.js");
 })();
 

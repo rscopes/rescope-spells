@@ -1,6 +1,6 @@
 {
   "name": "rescope-spells",
-  "version": "16.0.0",
+  "version": "16.0.1",
   "description": "Work in progress collection of chainable stores decorators for rescope",
   "repository": "https://github.com/n8tz/rescope-spells.git",
   "license": "MIT",
@@ -46,6 +46,7 @@
   },
   "scripts": {
     "build": "wpi && wpi :samples",
+    "staging": "wpi :staging",
     "dev": "wpi-dev-server :samples --hot",
     "runBrowser": "start http://localhost:8080"
   },

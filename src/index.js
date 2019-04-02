@@ -27,9 +27,10 @@
 import {isSpell as _isSpell, spells} from "./spellFactory";
 import "./spellsLib";
 
-export const isSpell    = _isSpell;
-export const asStore    = spells.asStore;
-export const asScope    = spells.asScope;
-export const asRef      = spells.asRef;
-export const asStateMap = spells.asStateMap;
-export default { ...spells, isSpell: _isSpell };
+export const isSpell      = _isSpell;
+export const asStore      = spells.asStore;
+export const asScope      = spells.asScope;
+export const asRef        = spells.asRef;
+export const withStateMap = spells.withStateMap;
+
+export default spells;

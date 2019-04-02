@@ -28,7 +28,7 @@ import React from "react";
 
 import {renderToString} from "react-dom/server"
 import is               from "is";
-import {isSpell}          from "./spellFactory";
+import {isSpell}        from "./spellFactory";
 import {
 	spells, Store, Scope, reScope, propsToScope, scopeToProps, Component, propsToStore,
 	scopeToState
@@ -108,4 +108,4 @@ let Lib = {
 	},
 }
 
-//export default Lib;
+export default Lib;
