@@ -34,14 +34,6 @@ import {
 	scopeToState
 }                       from "react-rescope";
 
-@propsToScope(['props'])
-@scopeToProps(['props'])
-class RSComp extends Component {
-	render() {
-		return this.props.children || [];
-	}
-}
-
 let Lib = {
 	@isSpell("store", v => (is.object(v) || is.string(v)))
 	store( obj, { 0: cfg }, ref ) {
