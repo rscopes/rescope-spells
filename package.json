@@ -1,6 +1,6 @@
 {
   "name": "rescope-spells",
-  "version": "16.0.3",
+  "version": "16.0.4",
   "description": "Work in progress collection of chainable stores decorators for rescope",
   "repository": "https://github.com/n8tz/rescope-spells.git",
   "license": "MIT",
@@ -58,7 +58,7 @@
   "dependencies": {
     "is": "^3.2.1",
     "react-rescope": "^16.0.6",
-    "rescope": "^4.3.10",
+    "rescope": "^4.4.3",
     "shortid": "^2.2.8"
   },
   "devDependencies": {
