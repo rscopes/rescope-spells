@@ -14,14 +14,13 @@
 import React    from "react";
 import ReactDom from "react-dom";
 
-import {Store}                                                           from "rescope";
-import {scopeToState, reScope, scopeToProps, propsToScope, propsToStore} from "react-rescope";
+import {scopeToState, withScope, scopeToProps, propsToScope, propsToStore} from "react-rescope";
 
 import {
 	withStateMap, asRef, asStore
 } from ".";
 
-@reScope(
+@withScope(
 	{
 		@asStore
 		test: { hello: "rScope" }

@@ -36,7 +36,7 @@ export const spells = {};
 let castTypesToAppliable = {};
 let castTypes            = {};
 
-rescope.isSpell = function caster( ...argz ) {
+export const isSpell = rescope.isSpell = function caster( ...argz ) {
 	// are we decorating a member / without argz
 	if ( argz[0] instanceof SimpleObjectProto && argz[2] instanceof SimpleObjectProto && argz[0].hasOwnProperty(argz[1]) ) {
 		argz[0][argz[1]] = argz[2].value = addCaster(argz[0][argz[1]], argz);
@@ -56,7 +56,6 @@ rescope.isSpell = function caster( ...argz ) {
 	return addCaster(...argz);
 };
 
-export const isSpell = rescope.isSpell;
 
 function addCaster( ...argz ) {
 	let cast = (!argz[0] || is.fn(argz[0])) && argz.shift();
