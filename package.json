@@ -1,8 +1,8 @@
 {
   "name": "rescope-spells",
-  "version": "16.0.4",
+  "version": "16.0.5",
   "description": "Work in progress collection of chainable stores decorators for rescope",
-  "repository": "https://github.com/n8tz/rescope-spells.git",
+  "repository": "https://github.com/rscopes/rescope-spells.git",
   "license": "MIT",
   "main": "dist/RSpells.js",
   "author": "Nathan Braun <n8tz.js@gmail.com>",
