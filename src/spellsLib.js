@@ -23,15 +23,10 @@
  *   @author : Nathanael Braun
  *   @contact : n8tz.js@gmail.com
  */
-import React from "react";
-
-import {renderToString} from "react-dom/server"
-import is               from "is";
-import {isSpell}        from "./spellFactory";
-import {
-	spells, Store, Scope, reScope, propsToScope, scopeToProps, Component, propsToStore,
-	scopeToState
-}                       from "react-rescope";
+import is             from "is";
+import React          from "react";
+import {Scope, Store} from "rescope";
+import {isSpell}      from "./spellFactory";
 
 let Lib = {
 	@isSpell("store", v => (is.object(v) || is.string(v)))

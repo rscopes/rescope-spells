@@ -26,11 +26,7 @@
 import React    from "react";
 import ReactDom from "react-dom";
 
-import {scopeToState, withScope, scopeToProps, propsToScope, propsToStore} from "react-rescope";
-
-import {
-	withStateMap, asRef, asStore
-} from ".";
+import {scopeToState, withScope, scopeToProps, propsToScope, asStore} from "react-scopes";
 
 @withScope(
 	{
@@ -52,7 +48,7 @@ class TestProps extends React.Component {
 	}
 }
 
-@reScope(
+@withScope(
 	{
 		
 		@asStore
@@ -73,7 +69,7 @@ class TestState extends React.Component {
 	}
 }
 
-@reScope(
+@withScope(
 	{
 		@asStore
 		test: { hello: "propsToScope" }
@@ -94,7 +90,7 @@ class TestPropProp extends React.Component {
 	}
 }
 
-@reScope(
+@withScope(
 	{
 		@asStore
 		testRoot: {
